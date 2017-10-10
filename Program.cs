@@ -10,6 +10,7 @@ namespace escapegame
     {
         static void Main(string[] args)
         {
+            // in dit bestand gaan we het spel maken.
         }
     }
 }
