@@ -89,7 +89,7 @@ namespace escapegame
             switch (Program.currentRoom)
             {
                 case 1:
-                    room1();
+                    room1_hall();
                     break;
                 case 2:
                     Console.WriteLine("kamer 2");
@@ -146,7 +146,7 @@ namespace escapegame
             }
         }
 
-        static void room1()
+        static void room1_hall()
         {
             // clears the console first
             Console.Clear();
