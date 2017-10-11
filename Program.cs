@@ -16,6 +16,14 @@ namespace escapegame
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 50;
+        public static int dotProgressTickRate = 400;
+
+        // holds value if you have found the ROT13 note
+        public static bool noteSeen = false;
+
+        // bool holding value of kitchen and living room keys
+        public static bool hasKitchenKey = false;
+        public static bool hasLivingRoomKey = false;
 
         // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
@@ -23,6 +31,7 @@ namespace escapegame
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
+            Console.SetWindowSize(150, 45);
             Program.inGame = mainMenu();
             while (Program.inGame == true)
             {
@@ -190,6 +199,17 @@ namespace escapegame
             }
         }
 
+        static void dotProgress()
+        {
+            // shows a dotting progress bar
+            foreach (char c in ".....")
+            {
+                System.Console.Write(c);
+                Thread.Sleep(dotProgressTickRate);
+            }
+            System.Console.Write("\n");
+        }
+
         static void room1_hall()
         {
             // clears the console first
@@ -242,24 +262,70 @@ namespace escapegame
             string choiceTafel = "tafel";
             string choiceHaard = "haard";
 
-            string doorzoeken = "Je doorzoekt de";
+            string doorzoeken = "Je kiest voor de";
 
             int choice = 0;
             choice = roomChoiceMenu3(choiceKoelkast, choiceTafel, choiceHaard);
             if (choice == 1)
             {
-                Console.WriteLine("{0} {1}", doorzoeken, choiceKoelkast);
-                Console.ReadLine();
+                if (Program.noteSeen == true && Program.hasKitchenKey == false)
+                {
+                    Console.WriteLine("Je doorzoekt de koelkast nog eens goed.");
+                    dotProgress();
+                    Console.WriteLine("Je vindt een sleutel!");
+                    Console.WriteLine("[!] Sleutel werd toegevoegd aan je inventaris!");
+                    Program.hasKitchenKey = true;
+                    Console.ReadLine();
+                }
+                else if (Program.noteSeen == true && Program.hasKitchenKey == true)
+                {
+                    Console.WriteLine("Je hebt de sleutel in de koelkast al gevonden.");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("{0} {1}", doorzoeken, choiceKoelkast);
+                    dotProgress();
+                    Console.WriteLine("Je maakt de koelkast open en ziet veel vlees.");
+                    Console.ReadLine();
+                }
             }
             else if (choice == 2)
             {
-                Console.WriteLine("{0} {1}", doorzoeken, choiceTafel);
-                Console.ReadLine();
+                if (Program.noteSeen == false)
+                {
+                    // table contains note encrypted with ROT13
+                    Console.WriteLine("{0} {1}", doorzoeken, choiceTafel);
+                    dotProgress();
+                    Console.WriteLine("Je ziet een briefje onder de tafel liggen!");
+                    dotProgress();
+                    Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
+                    Thread.Sleep(2000);
+                    Console.WriteLine("Je realiseert dat dit briefje met ROT13 is gecodeerd");
+                    Console.ReadLine();
+                    Program.noteSeen = true;
+                }
+                else if (Program.noteSeen == true)
+                {
+                    // you have already found the note in this case
+                    Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
+                    Console.ReadLine();
+                }
             }
             else if (choice == 3)
             {
-                Console.WriteLine("{0} {1}", doorzoeken, choiceHaard);
-                Console.ReadLine();
+                if (Program.noteSeen == true)
+                {
+                    // hint if you have already found the note
+                    Console.WriteLine("Je ziet een stuk vlees op het spit hangen.\nJe bent hier al geweest, misschien moet je het briefje ontcijferen?");
+                }
+                else
+                {
+                    Console.WriteLine("{0} {1}", doorzoeken, choiceHaard);
+                    dotProgress();
+                    Console.WriteLine("Je ziet een stuk vlees op het spit hangen.");
+                    Console.ReadLine();
+                }
             }
             else if (choice == 99)
             {
