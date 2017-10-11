@@ -49,9 +49,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ascii\Bedroom1.txt" />
+    <Content Include="ascii\Bedroom2.txt" />
     <Content Include="ascii\Hal.txt" />
     <Content Include="ascii\Kitchen.txt" />
-    <Content Include="ascii\Living room.txt" />
+    <Content Include="ascii\Livingroom.txt" />
     <Content Include="ascii\mainmenu.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
