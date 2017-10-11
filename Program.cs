@@ -17,6 +17,7 @@ namespace escapegame
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 50;
         public static int dotProgressTickRate = 400;
+        public static int moveRoomPAuse = 1000;
 
         // holds value if you have found the ROT13 note
         public static bool noteSeen = false;
@@ -31,7 +32,7 @@ namespace escapegame
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
-            Console.SetWindowSize(150, 45);
+            Console.SetWindowSize(125, 40);
             Program.inGame = mainMenu();
             while (Program.inGame == true)
             {
@@ -224,22 +225,39 @@ namespace escapegame
             printRoomStory(kamerVerhaal[Program.currentRoom -1]);
             
             // options
-            Console.WriteLine("Wil je naar de keuken of naar de woonkamer? [keuken]/[woonkamer] of [exit]");
+            Console.WriteLine("Wil je naar de keuken, woonkamer of trap? [keuken]/[woonkamer]/[trap] of [exit]");
             string choiceKeuken = "keuken";
             string choiceWoonkamer = "woonkamer";
+            string choiceTrap = "trap";
 
             int choice = 0;
-            choice = roomChoiceMenu2(choiceKeuken, choiceWoonkamer);
+            choice = roomChoiceMenu3(choiceKeuken, choiceWoonkamer, choiceTrap);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceKeuken);
                 Program.currentRoom = 2;
+                Thread.Sleep(Program.moveRoomPAuse);
 
             }
             else if (choice == 2)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceWoonkamer);
                 Program.currentRoom = 3;
+                Thread.Sleep(Program.moveRoomPAuse);
+            }
+            else if (choice == 3)
+            {
+                if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true)
+                {
+                    Console.WriteLine("Je hebt de sleutels en gaat naar de {0}", choiceTrap);
+                    Program.currentRoom = 4;
+                }
+                else
+                {
+                    Console.WriteLine("De deur bij de trap zit op slot! Je hebt twee sleutels nodig...");
+                    Program.currentRoom = 1;
+                }
+                Console.ReadLine();
             }
         }
 
@@ -270,7 +288,7 @@ namespace escapegame
             {
                 if (Program.noteSeen == true && Program.hasKitchenKey == false)
                 {
-                    Console.WriteLine("Je doorzoekt de koelkast nog eens goed.");
+                    Console.WriteLine("Je doorzoekt de koelkast grondig.");
                     dotProgress();
                     Console.WriteLine("Je vindt een sleutel!");
                     Console.WriteLine("[!] Sleutel werd toegevoegd aan je inventaris!");
