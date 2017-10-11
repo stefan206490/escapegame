@@ -13,7 +13,7 @@ namespace escapegame
         public static bool inGame = false;
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
-
+        //Hi
         static void Main(string[] args)
         {
             Program.inGame = mainMenu();
