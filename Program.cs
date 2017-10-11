@@ -17,7 +17,7 @@ namespace escapegame
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 50;
 
-        // kamer verhalen in een string array declareren
+        // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
         
         static void Main(string[] args)
@@ -92,8 +92,7 @@ namespace escapegame
                     room1_hall();
                     break;
                 case 2:
-                    Console.WriteLine("kamer 2");
-                    Console.ReadLine();
+                    room2_kitchen();
                     break;
                 case 3:
                     Console.WriteLine("kamer 3");
@@ -113,7 +112,7 @@ namespace escapegame
             }
         }
 
-        static int roomChoiceMenu(string choice1, string choice2)
+        static int roomChoiceMenu2(string choice1, string choice2)
         {
             string menuChoice = Console.ReadLine();
             if (menuChoice == choice1)
@@ -129,6 +128,42 @@ namespace escapegame
                 Program.currentRoom = 0;
                 return 0;
             }
+            else if (menuChoice == "terug")
+            {
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
+                Console.ReadLine();
+                return 0;
+            }
+        }
+
+        static int roomChoiceMenu3(string choice1, string choice2, string choice3)
+        {
+            string menuChoice = Console.ReadLine();
+            if (menuChoice == choice1)
+            {
+                return 1;
+            }
+            else if (menuChoice == choice2)
+            {
+                return 2;
+            }
+            else if (menuChoice == choice3)
+            {
+                return 3;
+            }
+            else if (menuChoice == "exit")
+            {
+                Program.currentRoom = 0;
+                return 0;
+            }
+            else if (menuChoice == "terug")
+            {
+                return 99;
+            }
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
@@ -139,10 +174,19 @@ namespace escapegame
 
         static void printRoomStory(string story)
         {
-            foreach (char c in story)
+            if (Program.roomVisited[Program.currentRoom - 1] == false)
             {
-                System.Console.Write(c);
-                Thread.Sleep(tickRate);
+                foreach (char c in story)
+                {
+                    System.Console.Write(c);
+                    Thread.Sleep(tickRate);
+                }
+                System.Console.Write("\n");
+                Program.roomVisited[Program.currentRoom - 1] = true;
+            }
+            else
+            {
+                Console.WriteLine(Program.kamerVerhaal[Program.currentRoom - 1]);
             }
         }
 
@@ -157,24 +201,71 @@ namespace escapegame
             Console.WriteLine(printOut);
 
             // prints out room story
-            printRoomStory(Program.kamerVerhaal[Program.currentRoom -1] + "\n");
-
+            printRoomStory(kamerVerhaal[Program.currentRoom -1]);
+            
+            // options
             Console.WriteLine("Wil je naar de keuken of naar de woonkamer? [keuken]/[woonkamer] of [exit]");
-
             string choiceKeuken = "keuken";
             string choiceWoonkamer = "woonkamer";
 
             int choice = 0;
-            choice = roomChoiceMenu(choiceKeuken, choiceWoonkamer);
+            choice = roomChoiceMenu2(choiceKeuken, choiceWoonkamer);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceKeuken);
                 Program.currentRoom = 2;
+
             }
             else if (choice == 2)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceWoonkamer);
                 Program.currentRoom = 3;
+            }
+        }
+
+        static void room2_kitchen()
+        {
+            // clears the console first
+            Console.Clear();
+
+            // prints out the ascii art
+            Program.asciiArt = "Kitchen.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+
+            // prints out room story
+            printRoomStory(kamerVerhaal[Program.currentRoom - 1]);
+            
+            // options
+            Console.WriteLine("Wat wil je doen in de keuken?\n[koelkast]/[tafel]/[haard] onderzoeken of [terug] of [exit]");
+            string choiceKoelkast = "koelkast";
+            string choiceTafel = "tafel";
+            string choiceHaard = "haard";
+
+            string doorzoeken = "Je doorzoekt de";
+
+            int choice = 0;
+            choice = roomChoiceMenu3(choiceKoelkast, choiceTafel, choiceHaard);
+            if (choice == 1)
+            {
+                Console.WriteLine("{0} {1}", doorzoeken, choiceKoelkast);
+                Console.ReadLine();
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine("{0} {1}", doorzoeken, choiceTafel);
+                Console.ReadLine();
+            }
+            else if (choice == 3)
+            {
+                Console.WriteLine("{0} {1}", doorzoeken, choiceHaard);
+                Console.ReadLine();
+            }
+            else if (choice == 99)
+            {
+                Console.WriteLine("Je gaat terug naar de hal...");
+                Program.currentRoom = 1;
+                Console.ReadLine();
             }
         }
     }
