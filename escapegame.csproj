@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ascii\New File" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ascii\Hal.txt" />

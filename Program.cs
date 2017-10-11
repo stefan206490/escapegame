@@ -29,10 +29,17 @@ namespace escapegame
             Program.asciiArt = "mainmenu.txt";
             string mainMenu = File.ReadAllText(filePath + asciiArt);
             Console.WriteLine(mainMenu);
+            Console.WriteLine("Schrijf [new] voor nieuwe game, schrijf [exit] om de game af te sluiten");
             string menuChoice = Console.ReadLine();
             if (menuChoice == "new" || menuChoice == "New")
             {
                 return true;
+            }
+            else if (menuChoice == "exit" || menuChoice == "Exit")
+            {
+                Console.WriteLine("Game wordt afgesloten...");
+                Console.ReadLine();
+                return false;
             }
             else
             {
@@ -45,6 +52,7 @@ namespace escapegame
             switch (Program.currentRoom)
             {
                 case 1:
+                    room1();
                     break;
                 case 2:
                     break;
@@ -64,7 +72,11 @@ namespace escapegame
 
         static void room1()
         {
-
+            Console.Clear();
+            Program.asciiArt = "Hal.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+            Console.ReadLine();
         }
     }
 }
