@@ -55,6 +55,7 @@
     <Content Include="ascii\Kitchen.txt" />
     <Content Include="ascii\Livingroom.txt" />
     <Content Include="ascii\mainmenu.txt" />
+    <Content Include="ascii\Stairs.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
