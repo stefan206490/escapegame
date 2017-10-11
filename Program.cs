@@ -15,16 +15,18 @@ namespace escapegame
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
-        public static int tickRate = 50;
+        public static int tickRate = 20;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPAuse = 1000;
 
         // holds value if you have found the ROT13 note
         public static bool noteSeen = false;
 
-        // bool holding value of kitchen and living room keys
+        // inventory
         public static bool hasKitchenKey = false;
         public static bool hasLivingRoomKey = false;
+
+        public static bool hasCandle = false;
 
         // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
@@ -105,10 +107,11 @@ namespace escapegame
                     room2_kitchen();
                     break;
                 case 3:
-                    Console.WriteLine("kamer 3");
-                    Console.ReadLine();
+                    room3_livingroom();
                     break;
                 case 4:
+                    Console.WriteLine("Trapdeur geopend!");
+                    Console.ReadLine();
                     break;
                 case 5:
                     break;
@@ -291,7 +294,7 @@ namespace escapegame
                     Console.WriteLine("Je doorzoekt de koelkast grondig.");
                     dotProgress();
                     Console.WriteLine("Je vindt een sleutel!");
-                    Console.WriteLine("[!] Sleutel werd toegevoegd aan je inventaris!");
+                    Console.WriteLine("[!] Sleutel 1 werd toegevoegd aan je inventaris!");
                     Program.hasKitchenKey = true;
                     Console.ReadLine();
                 }
@@ -336,6 +339,7 @@ namespace escapegame
                 {
                     // hint if you have already found the note
                     Console.WriteLine("Je ziet een stuk vlees op het spit hangen.\nJe bent hier al geweest, misschien moet je het briefje ontcijferen?");
+                    Console.ReadLine();
                 }
                 else
                 {
@@ -352,5 +356,92 @@ namespace escapegame
                 Console.ReadLine();
             }
         }
-    }
+
+        static void room3_livingroom()
+        {
+            // clears the console first
+            Console.Clear();
+
+            // prints out the ascii art
+            Program.asciiArt = "Livingroom.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+
+            // prints out room story, no delay if already visited
+            if (Program.roomVisited[currentRoom -1] == false)
+            {
+                printRoomStory(kamerVerhaal[Program.currentRoom - 1]);
+                Program.roomVisited[currentRoom - 1] = true;
+            }
+            else
+            {
+                Console.WriteLine(kamerVerhaal[Program.currentRoom -1]);
+            }
+
+            // options
+            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel] of [terug] of [exit]");
+            string choiceKist = "kist";
+            string choiceBoekenplank = "boekenplank";
+            string choiceTafel = "tafel";
+
+            int choice = 0;
+            choice = roomChoiceMenu3(choiceKist, choiceBoekenplank, choiceTafel);
+            if (choice == 1)
+            {
+                if (Program.hasCandle == false)
+                {
+                    Console.WriteLine("Je kiest voor de {0}", choiceKist);
+                    dotProgress();
+                    Console.WriteLine("Je vindt een kaars!");
+                    Console.ReadLine();
+                    Program.hasCandle = true;
+                }
+                else if (Program.hasCandle == true)
+                {
+                    Console.WriteLine("Je had hier eerder een kaars gevonden. Misschien is dit een hint?");
+                    Console.ReadLine();
+                }
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine("Je kiest voor de {0}", choiceBoekenplank);
+                dotProgress();
+                Console.WriteLine("Je ziet een paar boeken maar niks speciaals.");
+                Console.ReadLine();
+            }
+            else if (choice == 3)
+            {
+                if (Program.hasLivingRoomKey == false)
+                {
+                    Console.WriteLine("Je kiest voor de {0}", choiceTafel);
+                    dotProgress();
+                    Console.WriteLine("Je vindt een briefje met een raadsel: \"Ik ben lang als ik jong ben en kort als ik oud ben. Wat ben ik?\"\n(hint: het brandt)");
+                    System.Console.Write("Antwoord: ");
+                    string antwoord = Console.ReadLine();
+                    if (antwoord == "kaars")
+                    {
+                        Console.WriteLine("Gefeliciteerd! Dat was het juiste antwoord!");
+                        Console.WriteLine("[!] Sleutel 2 werdt toegevoegd aan je inventaris!");
+                        Program.hasLivingRoomKey = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Helaas! Verkeerd antwoord.");
+                    }
+                    Console.ReadLine();
+                }
+                else if (Program.hasLivingRoomKey == true)
+                {
+                    Console.WriteLine("Je hebt al eerder hier een sleutel gevonden. Je hebt hier niks meer te zoeken.");
+                    Console.ReadLine();
+                }
+            }
+            else if (choice == 99)
+            {
+                Console.WriteLine("Je besluit terug naar de hal te gaan...");
+                Program.currentRoom = 1;
+                Thread.Sleep(moveRoomPAuse);
+            }
+        }
+    }  
 }
