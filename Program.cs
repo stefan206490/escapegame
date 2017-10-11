@@ -42,9 +42,9 @@ namespace escapegame
         static void kamerVerhaalFunctie()
         {
             // initializes the strings for the chamber's story
-            Program.kamerVerhaal[0] = "Dit is het verhaal van kamer 1.";
-            Program.kamerVerhaal[1] = "Dit is het verhaal van kamer 2.";
-            Program.kamerVerhaal[2] = "Dit is het verhaal van kamer 3.";
+            Program.kamerVerhaal[0] = "Je bent in de hal. Je kan naar de woonkamer of naar de keuken. Wat wil je doen?";
+            Program.kamerVerhaal[1] = "Je bent nu in de keuken. Wat wil je doen?";
+            Program.kamerVerhaal[2] = "Je bent in de woonkamer. Je ziet een paar dingen wat je wel kan doorzoeken. Wat wil je doen?";
             Program.kamerVerhaal[3] = "Dit is het verhaal van kamer 4.";
             Program.kamerVerhaal[4] = "Dit is het verhaal van kamer 5.";
             Program.kamerVerhaal[5] = "Dit is het verhaal van kamer 6.";
