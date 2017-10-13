@@ -110,8 +110,7 @@ namespace escapegame
                     room3_livingroom();
                     break;
                 case 4:
-                    Console.WriteLine("Trapdeur geopend!");
-                    Console.ReadLine();
+                    room4_stairs();
                     break;
                 case 5:
                     break;
@@ -442,6 +441,11 @@ namespace escapegame
                 Program.currentRoom = 1;
                 Thread.Sleep(moveRoomPAuse);
             }
+        }
+
+        static void room4_stairs()
+        {
+
         }
     }  
 }
