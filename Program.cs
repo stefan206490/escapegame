@@ -19,7 +19,7 @@ namespace escapegame
         public static int dotProgressTickRate = 400;
         public static int moveRoomPAuse = 1000;
 
-        // holds value if you have found the ROT13 note
+        // holds value if you have found the ROT13 note.
         public static bool noteSeen = false;
 
         // inventory
