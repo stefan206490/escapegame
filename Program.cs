@@ -48,9 +48,9 @@ namespace escapegame
             Program.kamerVerhaal[0] = "Je bent in de hal. Je kan naar de woonkamer of naar de keuken. Wat wil je doen?";
             Program.kamerVerhaal[1] = "Je bent nu in de keuken. Wat wil je doen?";
             Program.kamerVerhaal[2] = "Je bent in de woonkamer. Je ziet een paar dingen wat je wel kan doorzoeken. Wat wil je doen?";
-            Program.kamerVerhaal[3] = "Dit is het verhaal van kamer 4.";
-            Program.kamerVerhaal[4] = "Dit is het verhaal van kamer 5.";
-            Program.kamerVerhaal[5] = "Dit is het verhaal van kamer 6.";
+            Program.kamerVerhaal[3] = "[kamer 4]Je bent nu op de eerste etage. Je ziet 2 deuren. Wat wil je doen?";
+            Program.kamerVerhaal[4] = "[kamer 5]Je bent nu in de linker kamer Wat wil je doen.";
+            Program.kamerVerhaal[5] = "[kamer 6]Je loopt de rechter slaapkamer binnen en je hoort iemand iets vragen.";
         }
 
         static bool mainMenu()
