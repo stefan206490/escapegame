@@ -15,7 +15,7 @@ namespace escapegame
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
-        public static int tickRate = 20;
+        public static int tickRate = 1;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPAuse = 1000;
 
@@ -25,6 +25,11 @@ namespace escapegame
         // inventory
         public static bool hasKitchenKey = false;
         public static bool hasLivingRoomKey = false;
+        public static bool hasBedroomKey = false;
+        public static bool hasHallKey = false;
+
+        public static bool hasMovedChest = false;
+        public static bool hasMovedWardrobe = false;
 
         public static bool hasCandle = false;
 
@@ -34,8 +39,9 @@ namespace escapegame
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
-            Console.SetWindowSize(125, 40);
+            Console.SetWindowSize(140, 40);
             Program.inGame = mainMenu();
+
             while (Program.inGame == true)
             {
                 gameLoop(Program.currentRoom);
@@ -58,6 +64,15 @@ namespace escapegame
             // will show welcome screen string with 100 ms pause between chars
             string mainMenuString = "Welkom bij de escape game!";
             foreach (char c in mainMenuString)
+            {
+                System.Console.Write(c);
+                Thread.Sleep(100);
+            }
+            System.Console.Write("\n");
+
+            // intro text
+            string introText = File.ReadAllText("../../intro.txt");
+            foreach (char c in introText)
             {
                 System.Console.Write(c);
                 Thread.Sleep(tickRate);
@@ -110,10 +125,10 @@ namespace escapegame
                     room3_livingroom();
                     break;
                 case 4:
-                    Console.WriteLine("Trapdeur geopend!");
-                    Console.ReadLine();
+                    room4_stairs();
                     break;
                 case 5:
+                    room5_bedroom1();
                     break;
                 case 6:
                     break;
@@ -185,6 +200,42 @@ namespace escapegame
             }
         }
 
+        static int roomChoiceMenu4(string choice1, string choice2, string choice3, string choice4)
+        {
+            string menuChoice = Console.ReadLine();
+            if (menuChoice == choice1)
+            {
+                return 1;
+            }
+            else if (menuChoice == choice2)
+            {
+                return 2;
+            }
+            else if (menuChoice == choice3)
+            {
+                return 3;
+            }
+            else if (menuChoice == choice4)
+            {
+                return 4;
+            }
+            else if (menuChoice == "exit")
+            {
+                Program.currentRoom = 0;
+                return 0;
+            }
+            else if (menuChoice == "terug")
+            {
+                return 99;
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
+                Console.ReadLine();
+                return 0;
+            }
+        }
+
         static void printRoomStory(string story)
         {
             if (Program.roomVisited[Program.currentRoom - 1] == false)
@@ -228,13 +279,12 @@ namespace escapegame
             printRoomStory(kamerVerhaal[Program.currentRoom -1]);
             
             // options
-            Console.WriteLine("Wil je naar de keuken, woonkamer of trap? [keuken]/[woonkamer]/[trap] of [exit]");
+            Console.WriteLine("Wil je naar de keuken, woonkamer of trap? [keuken]/[woonkamer] of [exit]");
             string choiceKeuken = "keuken";
             string choiceWoonkamer = "woonkamer";
-            string choiceTrap = "trap";
 
             int choice = 0;
-            choice = roomChoiceMenu3(choiceKeuken, choiceWoonkamer, choiceTrap);
+            choice = roomChoiceMenu2(choiceKeuken, choiceWoonkamer);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceKeuken);
@@ -247,20 +297,6 @@ namespace escapegame
                 Console.WriteLine("Je gaat naar de {0}", choiceWoonkamer);
                 Program.currentRoom = 3;
                 Thread.Sleep(Program.moveRoomPAuse);
-            }
-            else if (choice == 3)
-            {
-                if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true)
-                {
-                    Console.WriteLine("Je hebt de sleutels en gaat naar de {0}", choiceTrap);
-                    Program.currentRoom = 4;
-                }
-                else
-                {
-                    Console.WriteLine("De deur bij de trap zit op slot! Je hebt twee sleutels nodig...");
-                    Program.currentRoom = 1;
-                }
-                Console.ReadLine();
             }
         }
 
@@ -379,13 +415,14 @@ namespace escapegame
             }
 
             // options
-            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel] of [terug] of [exit]");
+            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel]/[trap] of [terug] of [exit]");
             string choiceKist = "kist";
             string choiceBoekenplank = "boekenplank";
             string choiceTafel = "tafel";
+            string choiceStairs = "trap";
 
             int choice = 0;
-            choice = roomChoiceMenu3(choiceKist, choiceBoekenplank, choiceTafel);
+            choice = roomChoiceMenu4(choiceKist, choiceBoekenplank, choiceTafel, choiceStairs);
             if (choice == 1)
             {
                 if (Program.hasCandle == false)
@@ -436,11 +473,155 @@ namespace escapegame
                     Console.ReadLine();
                 }
             }
+            else if (choice == 4)
+            {
+                if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true)
+                {
+                    Console.WriteLine("Je hebt de sleutels en gaat naar de {0}", choiceStairs);
+                    Program.currentRoom = 4;
+                }
+                else
+                {
+                    Console.WriteLine("De deur bij de trap zit op slot! Je hebt twee sleutels nodig...");
+                    Program.currentRoom = 3;
+                }
+                Console.ReadLine();
+            }
             else if (choice == 99)
             {
                 Console.WriteLine("Je besluit terug naar de hal te gaan...");
                 Program.currentRoom = 1;
                 Thread.Sleep(moveRoomPAuse);
+            }
+        }
+
+        static void room4_stairs()
+        {
+            // clears the console first
+            Console.Clear();
+
+            // prints out the ascii art
+            Program.asciiArt = "Stairs.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+
+            // prints out room story
+            printRoomStory(kamerVerhaal[Program.currentRoom - 1]);
+
+            // options
+            string choiceSlaapkamer1 = "links";
+            string choiceSlaapkamerEind = "rechts";
+            string choiceCode = "trap";
+            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer of [terug] of [exit]?");
+
+            int choice = 0;
+            choice = roomChoiceMenu3(choiceSlaapkamer1, choiceSlaapkamerEind, choiceCode);
+            if (choice == 1)
+            {
+                Console.WriteLine("Je gaat naar de linker slaapkamer");
+                Program.currentRoom = 5;
+                Thread.Sleep(Program.moveRoomPAuse);
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine("Je hebt de twee sleutels en betreedt de rechter slaapkamer");
+                Program.currentRoom = 6;
+                Thread.Sleep(Program.moveRoomPAuse);
+            }
+            else if (choice == 3)
+            {
+                Console.WriteLine("");
+            }
+            else if (choice == 99)
+            {
+                Console.WriteLine("Je gaat terug naar de woonkamer.");
+                Program.currentRoom = 3;
+                Thread.Sleep(Program.moveRoomPAuse);
+            }
+        }
+
+        static void room5_bedroom1()
+        {
+            Console.Clear();
+
+            // prints out the ascii art
+            Program.asciiArt = "Stairs.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+
+            // prints out room story
+            printRoomStory(kamerVerhaal[Program.currentRoom - 1]);
+
+            // options
+            string choiceChest = "kist";
+            string choiceWardrobe = "kast";
+            string choiceBed = "bed";
+            Console.WriteLine("Wil je de [kist]/[kast]/[bed] doorzoeken of [terug] of [exit]?");
+
+            int choice = 0;
+            choice = roomChoiceMenu3(choiceChest, choiceWardrobe, choiceBed);
+            if (choice == 1)
+            {
+                if (Program.hasBedroomKey == true)
+                {
+                    Console.WriteLine("Je hebt hier eerder al een sleutel gevonden.");
+                }
+                else if (Program.hasBedroomKey == false)
+                {
+                    Console.WriteLine("Wil je de kist [open]en of [verplaats]en?");
+                    string choiceForChest = Console.ReadLine();
+                    if (choiceForChest == "open")
+                    {
+                        Console.WriteLine("Je probeert de kist te openen...");
+                        Thread.Sleep(2000);
+                        Console.WriteLine("De kist zit op slot en je hebt een code nodig!");
+                        Console.WriteLine("Wat is de code?");
+                        System.Console.Write("> ");
+                        string chestCode = Convert.ToString(Console.ReadLine());
+                        if (chestCode == "462")
+                        {
+                            Console.WriteLine("De kist opent...");
+                            dotProgress();
+                            Console.WriteLine("Je vindt een sleutel!");
+                            Program.hasBedroomKey = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("De ingevoerde code is niet juist, de kist wilt niet openen");
+                        }
+                    }
+                    else if (choiceChest == "verplaats" && Program.hasMovedChest == false)
+                    {
+                        Console.WriteLine("Je verplaatst de kist");
+                        dotProgress();
+                        Console.WriteLine("Je vindt niks");
+                        Program.hasMovedChest = true;
+                        Console.ReadLine();
+                    }
+                    else if (choiceChest == "verplaats" && Program.hasMovedChest == true)
+                    {
+                        Console.WriteLine("Je hebt net de kist van verplaatst en niks gevonden");
+                        Console.ReadLine();
+                    }
+                }
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine("Je doorzoekt de kast");
+                dotProgress();
+                Console.WriteLine("Je vindt een briefje:");
+                Console.WriteLine("\"Er ligt een briefje met de code achter de schilderij in de hal.\"");
+                Console.ReadLine();
+            }
+            else if (choice == 3)
+            {
+                // todo
+            }
+            else if (choice == 99)
+            {
+                Console.WriteLine("Je gaat terug de traphal");
+                Program.currentRoom = 4;
+                Thread.Sleep(Program.moveRoomPAuse);
             }
         }
     }  
