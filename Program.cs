@@ -18,22 +18,21 @@ namespace escapegame
         public static int tickRate = 1;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPause = 1000;
-        public static int introTickRate = 5;
+        public static int introTickRate = 3;
 
         // holds value if you have found the ROT13 note.
         public static bool noteSeen = false;
 
         // inventory
-        public static bool hasKitchenKey = false;
-        public static bool hasLivingRoomKey = false;
-        public static bool hasBedroomKey = false;
-        public static bool hasHallKey = false;
+        public static bool hasKitchenKey = true;
+        public static bool hasLivingRoomKey = true;
+        public static bool hasBedroomKey = true;
+        public static bool hasHallKey = true;
+        public static bool hasPaintingKey = true;
 
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
         public static bool hasPaintingCode = false;
-
-        public static bool hasPaintingKey = false;
 
         public static bool hasCandle = false;
 
@@ -163,7 +162,7 @@ namespace escapegame
             }
             else if (menuChoice == "terug")
             {
-                return 0;
+                return 99;
             }
             else
             {
@@ -547,7 +546,6 @@ namespace escapegame
             // options
             string choiceSlaapkamer1 = "links";
             string choiceSlaapkamerEind = "rechts";
-            string choiceCode = "trap";
             Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer of [terug] of [exit]?");
 
             int choice = 0;
@@ -562,7 +560,7 @@ namespace escapegame
             {
                 if (Program.hasPaintingKey == true)
                 {
-                    Console.WriteLine("Je hebt de twee sleutels en betreedt de rechter slaapkamer");
+                    Console.WriteLine("Je hebt de sleutel voor de laatste kamer en betreedt de rechter slaapkamer.");
                     Program.currentRoom = 6;
                     Thread.Sleep(Program.moveRoomPause);
                 }
