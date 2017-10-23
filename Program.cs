@@ -47,6 +47,8 @@ namespace escapegame
         // final dialogue string array
         public static string[] dialogueArray = new string[13];
 
+        public static string cheatCodeString = "thereisnospoon1337";
+
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
@@ -58,6 +60,15 @@ namespace escapegame
             {
                 gameLoop(Program.currentRoom);
             }
+        }
+
+        static void cheatCodeFunction()
+        {
+            Program.hasKitchenKey = true;
+            Program.hasLivingRoomKey = true;
+            Program.hasBedroomKey = true;
+            Console.WriteLine("Cheat code geactiveerd!");
+            Thread.Sleep(moveRoomPause);
         }
 
         static void kamerVerhaalFunctie()
@@ -334,7 +345,7 @@ namespace escapegame
             string choicePainting = "schilderij";
 
             int choice = 0;
-            choice = roomChoiceMenu3(choiceKeuken, choiceWoonkamer, choicePainting);
+            choice = roomChoiceMenu4(choiceKeuken, choiceWoonkamer, choicePainting, Program.cheatCodeString);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceKeuken);
@@ -368,6 +379,10 @@ namespace escapegame
                     Console.WriteLine("Ongeldige keuze!");
                     Thread.Sleep(moveRoomPause);
                 }
+            }
+            else if (choice == 4)
+            {
+                cheatCodeFunction();
             }
         }
 
