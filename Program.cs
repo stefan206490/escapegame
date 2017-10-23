@@ -16,7 +16,7 @@ namespace escapegame
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 10;
-        public static int dialogueTickRate = 60;
+        public static int dialogueTickRate = 40;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPause = 1000;
         public static int introTickRate = 3;
@@ -28,8 +28,6 @@ namespace escapegame
         public static bool hasKitchenKey = false;
         public static bool hasLivingRoomKey = false;
         public static bool hasBedroomKey = false;
-        public static bool hasHallKey = false;
-        public static bool hasPaintingKey = false;
 
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
@@ -39,6 +37,9 @@ namespace escapegame
 
         // determines ending
         public static bool friendIsDead = false;
+
+        // ROT13 unecrypted
+        public static string kitchenCode = "de sleutel ligt in de koelkast";
 
         // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
@@ -50,7 +51,7 @@ namespace escapegame
         {
             kamerVerhaalFunctie();
             finalDialogue();
-            Console.SetWindowSize(140, 40);
+            Console.SetWindowSize(150, 45);
             Program.inGame = mainMenu();
 
             while (Program.inGame == true)
@@ -83,7 +84,7 @@ namespace escapegame
             Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
             Program.dialogueArray[9] = "Wil je je vriend uit het raam duwen? [ja]/[nee]";
             Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
-            Program.dialogueArray[11] = "Ik: Sorry, je ouders denken all dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
+            Program.dialogueArray[11] = "Ik: Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
             Program.dialogueArray[12] = "(Je duwt je vriend uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
@@ -325,7 +326,7 @@ namespace escapegame
             }
             else if (Program.hasMovedWardrobe == true)
             {
-                Console.WriteLine("Je bent weer in de hal. [keuken]/[woonkamer]/[schilderij] of [exit]");
+                Console.WriteLine("Kies: [keuken]/[woonkamer]/[schilderij] of [exit]");
             }
             
             string choiceKeuken = "keuken";
@@ -429,13 +430,25 @@ namespace escapegame
                     Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
                     Thread.Sleep(2000);
                     Console.WriteLine("Je realiseert dat dit briefje met ROT13 is gecodeerd");
-                    Console.ReadLine();
-                    Program.noteSeen = true;
+
+                    Console.WriteLine("Wat staat er eigenlijk echt op het briefje? (Voer de ontcijferde tekst in):");
+                    string ROT13Code = Console.ReadLine();
+                    if (ROT13Code == Program.kitchenCode)
+                    {
+                        Console.WriteLine("Dat klopt! Je hebt de code ontcijferd.");
+                        Console.ReadLine();
+                        Program.noteSeen = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Jouw input was niet correct. Probeer opnieuw!");
+                        Thread.Sleep(moveRoomPause);
+                    }
                 }
                 else if (Program.noteSeen == true)
                 {
                     // you have already found the note in this case
-                    Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
+                    Console.WriteLine("\"de sleutel ligt in de koelkast\"");
                     Console.ReadLine();
                 }
             }
@@ -522,7 +535,7 @@ namespace escapegame
                 {
                     Console.WriteLine("Je kiest voor de {0}", choiceTafel);
                     dotProgress();
-                    Console.WriteLine("Je vindt een briefje met een raadsel: \"Ik ben lang als ik jong ben en kort als ik oud ben. Wat ben ik?\"\n(hint: het brandt)");
+                    Console.WriteLine("Je vindt een briefje met een raadsel: \"Ik ben lang als ik jong ben en kort als ik oud ben. Wat ben ik?\"");
                     System.Console.Write("Antwoord: ");
                     string antwoord = Console.ReadLine();
                     if (antwoord == "kaars")
@@ -549,13 +562,15 @@ namespace escapegame
                 {
                     Console.WriteLine("Je hebt de sleutels en gaat naar de {0}", choiceStairs);
                     Program.currentRoom = 4;
+                    Thread.Sleep(moveRoomPause);
                 }
                 else
                 {
                     Console.WriteLine("De deur bij de trap zit op slot! Je hebt twee sleutels nodig...");
                     Program.currentRoom = 3;
+                    Console.ReadLine();
                 }
-                Console.ReadLine();
+                
             }
             else if (choice == 99)
             {
@@ -593,13 +608,13 @@ namespace escapegame
             }
             else if (choice == 2)
             {
-                if (Program.hasPaintingKey == true)
+                if (Program.hasBedroomKey == true)
                 {
                     Console.WriteLine("Je hebt de sleutel voor de laatste kamer en betreedt de rechter slaapkamer.");
                     Program.currentRoom = 6;
                     Thread.Sleep(Program.moveRoomPause);
                 }
-                else if (Program.hasPaintingKey == false)
+                else if (Program.hasBedroomKey == false)
                 {
                     Console.WriteLine("Je geen sleutel om de rechter deur te openen.");
                     Console.ReadLine();
@@ -658,6 +673,7 @@ namespace escapegame
                             Console.WriteLine("De kist opent...");
                             dotProgress();
                             Console.WriteLine("Je vindt een sleutel!");
+                            Console.ReadLine();
                             Program.hasBedroomKey = true;
                         }
                         else
@@ -718,6 +734,7 @@ namespace escapegame
             for (int i = 0; i < 3; i++)
             {
                 printDialogue(Program.dialogueArray[i]);
+                Thread.Sleep(moveRoomPause);
             }
 
             // string variablse for first dialogue choices
@@ -732,6 +749,7 @@ namespace escapegame
                 if (dialogueChoice1 == "1")
                 {
                     printDialogue(Program.dialogueArray[3]);
+                    Thread.Sleep(moveRoomPause);
                     break;
                 }
                 else if (dialogueChoice1 == "2")
@@ -739,6 +757,7 @@ namespace escapegame
                     for (int j = 4; j < 7; j++)
                     {
                         printDialogue(Program.dialogueArray[j]);
+                        Thread.Sleep(moveRoomPause);
                     }
                     break;
                 }
@@ -751,6 +770,7 @@ namespace escapegame
             for (int x = 7; x < 9; x++)
             {
                 printDialogue(Program.dialogueArray[x]);
+                Thread.Sleep(moveRoomPause);
             }
 
             // dialogue choice 2
@@ -761,6 +781,7 @@ namespace escapegame
                 if (dialogueChoice2 == "nee")
                 {
                     printDialogue(Program.dialogueArray[10]);
+                    Thread.Sleep(moveRoomPause);
                     break;
                 }
                 else if (dialogueChoice2 == "ja")
@@ -768,6 +789,7 @@ namespace escapegame
                     for (int j = 11; j < 13; j++)
                     {
                         printDialogue(Program.dialogueArray[j]);
+                        Thread.Sleep(moveRoomPause);
                     }
                     Program.friendIsDead = true;
                     break;
@@ -777,7 +799,7 @@ namespace escapegame
                     Console.WriteLine("Ongeldige keuze. Kies [ja] of [nee]");
                 }
             }
-            Thread.Sleep(moveRoomPause * 3);
+            Thread.Sleep(moveRoomPause * 2);
 
             Console.Clear();
 
