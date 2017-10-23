@@ -39,7 +39,8 @@ namespace escapegame
         public static bool friendIsDead = false;
 
         // ROT13 unecrypted
-        public static string kitchenCode = "de sleutel ligt in de koelkast";
+        public static string kitchenCodeCapital = "De sleutel ligt in de koelkast";
+        public static string kitchenCodeNonCapital = "de sleutel ligt in de koelkast";
 
         // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
@@ -448,7 +449,7 @@ namespace escapegame
 
                     Console.WriteLine("Wat staat er eigenlijk echt op het briefje? (Voer de ontcijferde tekst in):");
                     string ROT13Code = Console.ReadLine();
-                    if (ROT13Code == Program.kitchenCode)
+                    if (ROT13Code == Program.kitchenCodeNonCapital || ROT13Code == Program.kitchenCodeCapital)
                     {
                         Console.WriteLine("Dat klopt! Je hebt de code ontcijferd.");
                         Console.ReadLine();
