@@ -15,7 +15,8 @@ namespace escapegame
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
-        public static int tickRate = 1;
+        public static int tickRate = 10;
+        public static int dialogueTickRate = 60;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPause = 1000;
         public static int introTickRate = 3;
@@ -24,11 +25,11 @@ namespace escapegame
         public static bool noteSeen = false;
 
         // inventory
-        public static bool hasKitchenKey = true;
-        public static bool hasLivingRoomKey = true;
-        public static bool hasBedroomKey = true;
-        public static bool hasHallKey = true;
-        public static bool hasPaintingKey = true;
+        public static bool hasKitchenKey = false;
+        public static bool hasLivingRoomKey = false;
+        public static bool hasBedroomKey = false;
+        public static bool hasHallKey = false;
+        public static bool hasPaintingKey = false;
 
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
@@ -36,12 +37,19 @@ namespace escapegame
 
         public static bool hasCandle = false;
 
+        // determines ending
+        public static bool friendIsDead = false;
+
         // chamber's stories initialized in a string array
         public static string[] kamerVerhaal = new string[6];
-        
+
+        // final dialogue string array
+        public static string[] dialogueArray = new string[13];
+
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
+            finalDialogue();
             Console.SetWindowSize(140, 40);
             Program.inGame = mainMenu();
 
@@ -57,9 +65,26 @@ namespace escapegame
             Program.kamerVerhaal[0] = "Je bent in de hal. Je kan naar de woonkamer of naar de keuken. Wat wil je doen?";
             Program.kamerVerhaal[1] = "Je bent nu in de keuken. Wat wil je doen?";
             Program.kamerVerhaal[2] = "Je bent in de woonkamer. Je ziet een paar dingen wat je wel kan doorzoeken. Wat wil je doen?";
-            Program.kamerVerhaal[3] = "[kamer 4]Je bent nu op de eerste etage. Je ziet 2 deuren. Wat wil je doen?";
-            Program.kamerVerhaal[4] = "[kamer 5]Je bent nu in de linker kamer Wat wil je doen.";
-            Program.kamerVerhaal[5] = "[kamer 6]Je loopt de rechter slaapkamer binnen en je hoort iemand iets vragen.";
+            Program.kamerVerhaal[3] = "Je bent nu op de eerste etage. Je ziet 2 deuren. Wat wil je doen?";
+            Program.kamerVerhaal[4] = "Je bent nu in de linker kamer Wat wil je doen.";
+            Program.kamerVerhaal[5] = "Je loopt de rechter slaapkamer binnen en je hoort iemand iets vragen.";
+        }
+
+        static void finalDialogue()
+        {
+            Program.dialogueArray[0] = "Vriend: Hallo, wie is daar?";
+            Program.dialogueArray[1] = "Ik: Ben jij dat vriend?";
+            Program.dialogueArray[2] = "Vriend: Ja ik ben het, hoe gaat het met jou?";
+            Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
+            Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
+            Program.dialogueArray[5] = "Vriend: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
+            Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt";
+            Program.dialogueArray[7] = "Vriend: Hoe kunnen we hier wegkomen?";
+            Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
+            Program.dialogueArray[9] = "Wil je je vriend uit het raam duwen? [ja]/[nee]";
+            Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
+            Program.dialogueArray[11] = "Ik: Sorry, je ouders denken all dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
+            Program.dialogueArray[12] = "(Je duwt je vriend uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
         static bool mainMenu()
@@ -256,6 +281,16 @@ namespace escapegame
             {
                 Console.WriteLine(Program.kamerVerhaal[Program.currentRoom - 1]);
             }
+        }
+
+        static void printDialogue(string story)
+        {
+            foreach (char c in story)
+            {
+                System.Console.Write(c);
+                Thread.Sleep(dialogueTickRate);
+            }
+            System.Console.Write("\n");
         }
 
         static void dotProgress()
@@ -672,7 +707,89 @@ namespace escapegame
 
         static void room6_bedroom2_final()
         {
-            Console.WriteLine("dit is de eind kamer");
+            Console.Clear();
+
+            // ending dialogue
+            endingDialogue();
+        }
+
+        static void endingDialogue()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                printDialogue(Program.dialogueArray[i]);
+            }
+
+            // string variablse for first dialogue choices
+            string dialogueChoice1;
+            string dialogueChoice2;
+
+            // dialogue choice 1
+            while (true)
+            {
+                Console.WriteLine("Wat wil je zeggen? [1] Met mij gaat het goed / [2] Nee, het gaat niet goed");
+                dialogueChoice1 = Console.ReadLine();
+                if (dialogueChoice1 == "1")
+                {
+                    printDialogue(Program.dialogueArray[3]);
+                    break;
+                }
+                else if (dialogueChoice1 == "2")
+                {
+                    for (int j = 4; j < 7; j++)
+                    {
+                        printDialogue(Program.dialogueArray[j]);
+                    }
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige keuze. Kies [1] of [2]");
+                }
+            }
+
+            for (int x = 7; x < 9; x++)
+            {
+                printDialogue(Program.dialogueArray[x]);
+            }
+
+            // dialogue choice 2
+            while (true)
+            {
+                Console.WriteLine(dialogueArray[9]);
+                dialogueChoice2 = Console.ReadLine();
+                if (dialogueChoice2 == "nee")
+                {
+                    printDialogue(Program.dialogueArray[10]);
+                    break;
+                }
+                else if (dialogueChoice2 == "ja")
+                {
+                    for (int j = 11; j < 13; j++)
+                    {
+                        printDialogue(Program.dialogueArray[j]);
+                    }
+                    Program.friendIsDead = true;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige keuze. Kies [ja] of [nee]");
+                }
+            }
+            Thread.Sleep(moveRoomPause * 3);
+
+            Console.Clear();
+
+            if (Program.friendIsDead == true)
+            {
+                Console.WriteLine("Je vriend is dood! Game over.");
+            }
+            else
+            {
+                Console.WriteLine("Je bent samen met je vriend uit het huis ontsnapt! Game over.");
+            }
+            Program.currentRoom = 0;
             Console.ReadLine();
         }
     }  
