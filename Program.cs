@@ -17,7 +17,8 @@ namespace escapegame
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 1;
         public static int dotProgressTickRate = 400;
-        public static int moveRoomPAuse = 1000;
+        public static int moveRoomPause = 1000;
+        public static int introTickRate = 5;
 
         // holds value if you have found the ROT13 note.
         public static bool noteSeen = false;
@@ -30,6 +31,9 @@ namespace escapegame
 
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
+        public static bool hasPaintingCode = false;
+
+        public static bool hasPaintingKey = false;
 
         public static bool hasCandle = false;
 
@@ -66,7 +70,7 @@ namespace escapegame
             foreach (char c in mainMenuString)
             {
                 System.Console.Write(c);
-                Thread.Sleep(100);
+                Thread.Sleep(introTickRate);
             }
             System.Console.Write("\n");
 
@@ -131,6 +135,7 @@ namespace escapegame
                     room5_bedroom1();
                     break;
                 case 6:
+                    room6_bedroom2_final();
                     break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
@@ -278,25 +283,56 @@ namespace escapegame
             // prints out room story
             printRoomStory(kamerVerhaal[Program.currentRoom -1]);
             
-            // options
-            Console.WriteLine("Wil je naar de keuken, woonkamer of trap? [keuken]/[woonkamer] of [exit]");
+            // options (before)
+
+            if (Program.hasMovedWardrobe == false)
+            {
+                Console.WriteLine("Wil je naar de keuken of woonkamer? [keuken]/[woonkamer] of [exit]");
+            }
+            else if (Program.hasMovedWardrobe == true)
+            {
+                Console.WriteLine("Je bent weer in de hal. [keuken]/[woonkamer]/[schilderij] of [exit]");
+            }
+            
             string choiceKeuken = "keuken";
             string choiceWoonkamer = "woonkamer";
+            string choicePainting = "schilderij";
 
             int choice = 0;
-            choice = roomChoiceMenu2(choiceKeuken, choiceWoonkamer);
+            choice = roomChoiceMenu3(choiceKeuken, choiceWoonkamer, choicePainting);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceKeuken);
                 Program.currentRoom = 2;
-                Thread.Sleep(Program.moveRoomPAuse);
+                Thread.Sleep(Program.moveRoomPause);
 
             }
             else if (choice == 2)
             {
                 Console.WriteLine("Je gaat naar de {0}", choiceWoonkamer);
                 Program.currentRoom = 3;
-                Thread.Sleep(Program.moveRoomPAuse);
+                Thread.Sleep(Program.moveRoomPause);
+            }
+            else if (choice == 3)
+            {
+                if (Program.hasMovedWardrobe == true && Program.hasPaintingCode == false)
+                {
+                    Console.WriteLine("Je verplaatst de schilderij.");
+                    dotProgress();
+                    Console.WriteLine("Je vindt een papiertje met drie cijfers: 264");
+                    Program.hasPaintingCode = true;
+                    Console.ReadLine();
+                }
+                else if (Program.hasMovedWardrobe == true && Program.hasPaintingCode == true)
+                {
+                    Console.WriteLine("Je hebt hier net een code gevonden: 264");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige keuze!");
+                    Thread.Sleep(moveRoomPause);
+                }
             }
         }
 
@@ -389,7 +425,7 @@ namespace escapegame
             {
                 Console.WriteLine("Je gaat terug naar de hal...");
                 Program.currentRoom = 1;
-                Console.ReadLine();
+                Thread.Sleep(moveRoomPause);
             }
         }
 
@@ -491,7 +527,7 @@ namespace escapegame
             {
                 Console.WriteLine("Je besluit terug naar de hal te gaan...");
                 Program.currentRoom = 1;
-                Thread.Sleep(moveRoomPAuse);
+                Thread.Sleep(moveRoomPause);
             }
         }
 
@@ -515,28 +551,33 @@ namespace escapegame
             Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer of [terug] of [exit]?");
 
             int choice = 0;
-            choice = roomChoiceMenu3(choiceSlaapkamer1, choiceSlaapkamerEind, choiceCode);
+            choice = roomChoiceMenu2(choiceSlaapkamer1, choiceSlaapkamerEind);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de linker slaapkamer");
                 Program.currentRoom = 5;
-                Thread.Sleep(Program.moveRoomPAuse);
+                Thread.Sleep(Program.moveRoomPause);
             }
             else if (choice == 2)
             {
-                Console.WriteLine("Je hebt de twee sleutels en betreedt de rechter slaapkamer");
-                Program.currentRoom = 6;
-                Thread.Sleep(Program.moveRoomPAuse);
-            }
-            else if (choice == 3)
-            {
-                Console.WriteLine("");
+                if (Program.hasPaintingKey == true)
+                {
+                    Console.WriteLine("Je hebt de twee sleutels en betreedt de rechter slaapkamer");
+                    Program.currentRoom = 6;
+                    Thread.Sleep(Program.moveRoomPause);
+                }
+                else if (Program.hasPaintingKey == false)
+                {
+                    Console.WriteLine("Je geen sleutel om de rechter deur te openen.");
+                    Console.ReadLine();
+                }
+                
             }
             else if (choice == 99)
             {
                 Console.WriteLine("Je gaat terug naar de woonkamer.");
                 Program.currentRoom = 3;
-                Thread.Sleep(Program.moveRoomPAuse);
+                Thread.Sleep(Program.moveRoomPause);
             }
         }
 
@@ -545,7 +586,7 @@ namespace escapegame
             Console.Clear();
 
             // prints out the ascii art
-            Program.asciiArt = "Stairs.txt";
+            Program.asciiArt = "Bedroom1.txt";
             string printOut = File.ReadAllText(filePath + Program.asciiArt);
             Console.WriteLine(printOut);
 
@@ -565,6 +606,7 @@ namespace escapegame
                 if (Program.hasBedroomKey == true)
                 {
                     Console.WriteLine("Je hebt hier eerder al een sleutel gevonden.");
+                    Console.ReadLine();
                 }
                 else if (Program.hasBedroomKey == false)
                 {
@@ -588,9 +630,10 @@ namespace escapegame
                         else
                         {
                             Console.WriteLine("De ingevoerde code is niet juist, de kist wilt niet openen");
+                            Thread.Sleep(moveRoomPause);
                         }
                     }
-                    else if (choiceChest == "verplaats" && Program.hasMovedChest == false)
+                    else if (choiceForChest == "verplaats" && Program.hasMovedChest == false)
                     {
                         Console.WriteLine("Je verplaatst de kist");
                         dotProgress();
@@ -598,7 +641,7 @@ namespace escapegame
                         Program.hasMovedChest = true;
                         Console.ReadLine();
                     }
-                    else if (choiceChest == "verplaats" && Program.hasMovedChest == true)
+                    else if (choiceForChest == "verplaats" && Program.hasMovedChest == true)
                     {
                         Console.WriteLine("Je hebt net de kist van verplaatst en niks gevonden");
                         Console.ReadLine();
@@ -611,18 +654,28 @@ namespace escapegame
                 dotProgress();
                 Console.WriteLine("Je vindt een briefje:");
                 Console.WriteLine("\"Er ligt een briefje met de code achter de schilderij in de hal.\"");
+                Program.hasMovedWardrobe = true;
                 Console.ReadLine();
             }
             else if (choice == 3)
             {
-                // todo
+                Console.WriteLine("Je zoekt onder het bed");
+                dotProgress();
+                Console.WriteLine("Je vindt niks");
+                Thread.Sleep(moveRoomPause);
             }
             else if (choice == 99)
             {
                 Console.WriteLine("Je gaat terug de traphal");
                 Program.currentRoom = 4;
-                Thread.Sleep(Program.moveRoomPAuse);
+                Thread.Sleep(Program.moveRoomPause);
             }
+        }
+
+        static void room6_bedroom2_final()
+        {
+            Console.WriteLine("dit is de eind kamer");
+            Console.ReadLine();
         }
     }  
 }
