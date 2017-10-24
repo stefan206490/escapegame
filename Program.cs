@@ -306,6 +306,26 @@ namespace escapegame
             System.Console.Write("\n");
         }
 
+        static void printInventory()
+        {
+            if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == false)
+            {
+                Console.WriteLine("Inventaris: keuken sleutel");
+            }
+            else if (Program.hasLivingRoomKey == true && Program.hasKitchenKey == false)
+            {
+                Console.WriteLine("Inventaris: woonkamer sleutel");
+            }
+            else if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true && hasBedroomKey == false)
+            {
+                Console.WriteLine("Inventaris: keuken sleutel; woonkamer sleutel");
+            }
+            else if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true && Program.hasBedroomKey == true)
+            {
+                Console.WriteLine("Inventaris: keuken sleutel; woonkamer sleutel; slaapkamer sleutel");
+            }
+        }
+
         static void dotProgress()
         {
             // shows a dotting progress bar
@@ -321,6 +341,8 @@ namespace escapegame
         {
             // clears the console first
             Console.Clear();
+
+            printInventory();
 
             // prints out the ascii art
             Program.asciiArt = "Hal.txt";
@@ -391,6 +413,8 @@ namespace escapegame
         {
             // clears the console first
             Console.Clear();
+
+            printInventory();
 
             // prints out the ascii art
             Program.asciiArt = "Kitchen.txt";
@@ -497,6 +521,8 @@ namespace escapegame
             // clears the console first
             Console.Clear();
 
+            printInventory();
+
             // prints out the ascii art
             Program.asciiArt = "Livingroom.txt";
             string printOut = File.ReadAllText(filePath + Program.asciiArt);
@@ -601,6 +627,8 @@ namespace escapegame
             // clears the console first
             Console.Clear();
 
+            printInventory();
+
             // prints out the ascii art
             Program.asciiArt = "Stairs.txt";
             string printOut = File.ReadAllText(filePath + Program.asciiArt);
@@ -648,6 +676,8 @@ namespace escapegame
         static void room5_bedroom1()
         {
             Console.Clear();
+
+            printInventory();
 
             // prints out the ascii art
             Program.asciiArt = "Bedroom1.txt";
