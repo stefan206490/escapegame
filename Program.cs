@@ -77,7 +77,7 @@ namespace escapegame
             // initializes the strings for the chamber's story
             Program.kamerVerhaal[0] = "Je bent in de hal. Je kan naar de woonkamer of naar de keuken. Wat wil je doen?";
             Program.kamerVerhaal[1] = "Je bent nu in de keuken. Wat wil je doen?";
-            Program.kamerVerhaal[2] = "Je bent in de woonkamer. Je ziet een paar dingen wat je wel kan doorzoeken. Wat wil je doen?";
+            Program.kamerVerhaal[2] = "Je bent in de woonkamer. Je ziet een paar dingen die je wel kan doorzoeken. Wat wil je doen?";
             Program.kamerVerhaal[3] = "Je bent nu op de eerste etage. Je ziet 2 deuren. Wat wil je doen?";
             Program.kamerVerhaal[4] = "Je bent nu in de linker kamer Wat wil je doen.";
             Program.kamerVerhaal[5] = "Je loopt de rechter slaapkamer binnen en je hoort iemand iets vragen.";
