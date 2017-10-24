@@ -771,6 +771,13 @@ namespace escapegame
         {
             Console.Clear();
 
+            // prints out the ascii art
+            /*
+            Program.asciiArt = "";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);
+            */
+
             // ending dialogue
             endingDialogue();
         }
