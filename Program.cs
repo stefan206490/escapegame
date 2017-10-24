@@ -29,6 +29,7 @@ namespace escapegame
         public static bool hasLivingRoomKey = false;
         public static bool hasBedroomKey = false;
 
+        // environment changes
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
         public static bool hasPaintingCode = false;
@@ -771,13 +772,10 @@ namespace escapegame
         {
             Console.Clear();
 
-            // prints out the ascii art
-            /*
-            Program.asciiArt = "";
+            Program.asciiArt = "Bedroom2.txt";
             string printOut = File.ReadAllText(filePath + Program.asciiArt);
             Console.WriteLine(printOut);
-            */
-
+            
             // ending dialogue
             endingDialogue();
         }
@@ -858,10 +856,20 @@ namespace escapegame
 
             if (Program.friendIsDead == true)
             {
+                /*
+                Program.asciiArt = "";
+                string printOut = File.ReadAllText(filePath + Program.asciiArt);
+                Console.WriteLine(printOut);
+                */
                 Console.WriteLine("Je vriend is dood! Game over.");
             }
             else
             {
+                /*
+                Program.asciiArt = "";
+                string printOut = File.ReadAllText(filePath + Program.asciiArt);
+                Console.WriteLine(printOut);
+                */
                 Console.WriteLine("Je bent samen met je vriend uit het huis ontsnapt! Game over.");
             }
             Program.currentRoom = 0;
