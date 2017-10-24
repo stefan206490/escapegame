@@ -890,6 +890,9 @@ namespace escapegame
                 Thread.Sleep(dialogueTickRate);
             }
             System.Console.Write("\n");
+
+            Console.ReadLine();
+            Program.currentRoom = 0;
         }
     }  
 }
