@@ -51,6 +51,7 @@
   <ItemGroup>
     <Content Include="ascii\Bedroom1.txt" />
     <Content Include="ascii\Bedroom2.txt" />
+    <Content Include="ascii\EndingBad.txt" />
     <Content Include="ascii\Hal.txt" />
     <Content Include="ascii\Kitchen.txt" />
     <Content Include="ascii\Livingroom.txt" />
