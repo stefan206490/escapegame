@@ -175,6 +175,9 @@ namespace escapegame
                 case 6:
                     room6_bedroom2_final();
                     break;
+                case 7:
+                    showCredits();
+                    break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
                     Console.ReadLine();
@@ -856,24 +859,37 @@ namespace escapegame
 
             if (Program.friendIsDead == true)
             {
-                /*
-                Program.asciiArt = "";
+                Program.asciiArt = "EndingBad.txt";
                 string printOut = File.ReadAllText(filePath + Program.asciiArt);
                 Console.WriteLine(printOut);
-                */
+                
                 Console.WriteLine("Je vriend is dood! Game over.");
             }
             else
             {
-                /*
-                Program.asciiArt = "";
+                Program.asciiArt = "EndingGood.txt";
                 string printOut = File.ReadAllText(filePath + Program.asciiArt);
                 Console.WriteLine(printOut);
-                */
+                
                 Console.WriteLine("Je bent samen met je vriend uit het huis ontsnapt! Game over.");
             }
-            Program.currentRoom = 0;
+            Program.currentRoom = 7;
             Console.ReadLine();
+        }
+
+        static void showCredits()
+        {
+            Console.Clear();
+            Console.WriteLine("Dank je voor het spelen van het spel!");
+
+            // show credits
+            string introText = File.ReadAllText("../../credits.txt");
+            foreach (char c in introText)
+            {
+                System.Console.Write(c);
+                Thread.Sleep(dialogueTickRate);
+            }
+            System.Console.Write("\n");
         }
     }  
 }

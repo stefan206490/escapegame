@@ -1,0 +1,11 @@
+﻿Gemaakt door:
+Stefan Beckers - projectleider en notulist
+Mark Rendes - programmeur en documentbeheerder
+David Lei - programmeur en tester
+
+Tools:
+Notepad++
+Visual Studio 2017
+
+Programmeertaal:
+C#
