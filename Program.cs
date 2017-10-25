@@ -92,7 +92,7 @@ namespace escapegame
             Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
             Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
             Program.dialogueArray[5] = "Vriend: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
-            Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt";
+            Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
             Program.dialogueArray[7] = "Vriend: Hoe kunnen we hier wegkomen?";
             Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
             Program.dialogueArray[9] = "Wil je je vriend uit het raam duwen? [ja]/[nee]";
@@ -664,7 +664,7 @@ namespace escapegame
                 }
                 else if (Program.hasBedroomKey == false)
                 {
-                    Console.WriteLine("Je geen sleutel om de rechter deur te openen.");
+                    Console.WriteLine("Je hebt geen sleutel om de rechter deur te openen.");
                     Console.ReadLine();
                 }
                 
@@ -890,6 +890,9 @@ namespace escapegame
                 Thread.Sleep(dialogueTickRate);
             }
             System.Console.Write("\n");
+
+            Console.ReadLine();
+            Program.currentRoom = 0;
         }
     }  
 }
