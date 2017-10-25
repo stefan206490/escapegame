@@ -144,7 +144,7 @@ namespace escapegame
             {
                 // exits the game
                 Console.WriteLine("Game wordt afgesloten...");
-                Console.ReadLine();
+                Thread.Sleep(3000);
                 return false;
             }
             else
@@ -180,7 +180,7 @@ namespace escapegame
                     break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
-                    Console.ReadLine();
+                    Thread.Sleep(3000);
                     Program.inGame = false;
                     break;
             }
