@@ -314,19 +314,32 @@ namespace escapegame
         {
             if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == false)
             {
-                Console.WriteLine("Inventaris: keuken sleutel");
+                Console.WriteLine("Sleutels: keuken sleutel");
             }
             else if (Program.hasLivingRoomKey == true && Program.hasKitchenKey == false)
             {
-                Console.WriteLine("Inventaris: woonkamer sleutel");
+                Console.WriteLine("Sleutels: woonkamer sleutel");
             }
             else if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true && hasBedroomKey == false)
             {
-                Console.WriteLine("Inventaris: keuken sleutel; woonkamer sleutel");
+                Console.WriteLine("Sleutels: keuken sleutel; woonkamer sleutel");
             }
             else if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == true && Program.hasBedroomKey == true)
             {
-                Console.WriteLine("Inventaris: keuken sleutel; woonkamer sleutel; slaapkamer sleutel");
+                Console.WriteLine("Sleutels: keuken sleutel; woonkamer sleutel; slaapkamer sleutel");
+            }
+
+            if (Program.hasCandle == true && Program.hasPaintingCode == false)
+            {
+                Console.WriteLine("Objecten: kaars");
+            }
+            else if (Program.hasCandle == false && Program.hasPaintingCode == false)
+            {
+                Console.WriteLine("Objecten: code: 264")
+            }
+            else if (Program.hasCandle == true && Program.hasPaintingCode == true)
+            {
+                Console.WriteLine("Objecten: kaars; code 264");
             }
         }
 
@@ -472,6 +485,7 @@ namespace escapegame
                     Console.WriteLine("Je ziet een briefje onder de tafel liggen!");
                     dotProgress();
                     Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
+                    Thread.Sleep(1000);
                     dotProgress();
                     Console.WriteLine("Je realiseert dat dit briefje met ROT13 is gecodeerd");
 
