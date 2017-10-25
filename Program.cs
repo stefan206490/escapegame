@@ -669,14 +669,7 @@ namespace escapegame
             string choiceSlaapkamer1 = "links";
             string choiceSlaapkamerEind = "rechts";
             string choiceCandle = "kaars";
-            if (Program.hasCandle == false)
-            {
-                Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [terug] of [exit]?");
-            }
-            else if (Program.hasCandle == true)
-            {
-                Console.WriteLine("Wil je naar de linker [links], rechter [rechts] slaapkamer of een [kaars] aansteken? of [terug] of [exit]?");
-            }
+            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [terug] of [exit]?");
             
 
             int choice = 0;
@@ -772,6 +765,7 @@ namespace escapegame
                         Thread.Sleep(300);
                     }
                     Console.WriteLine("Dat was juist! Het nummer was: {0}", randGetal);
+                    Console.WriteLine("De cheatcode is: \"thereisnospoon1337\"\nVoer deze in bij de hal.");
                     Console.ReadLine();
 
                     inMiniGame = false;
