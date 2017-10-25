@@ -335,7 +335,7 @@ namespace escapegame
             }
             else if (Program.hasCandle == false && Program.hasPaintingCode == false)
             {
-                Console.WriteLine("Objecten: code: 264")
+                Console.WriteLine("Objecten: code: 264");
             }
             else if (Program.hasCandle == true && Program.hasPaintingCode == true)
             {
