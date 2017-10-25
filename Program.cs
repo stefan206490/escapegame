@@ -15,11 +15,12 @@ namespace escapegame
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
-        public static int tickRate = 10;
+        public static int tickRate = 1;
         public static int dialogueTickRate = 40;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPause = 1000;
         public static int introTickRate = 3;
+        public static int getal;
 
         // holds value if you have found the ROT13 note.
         public static bool noteSeen = false;
@@ -716,15 +717,6 @@ namespace escapegame
         static void numberMiniGame()
         {
             Console.Clear();
-
-            printInventory();
-
-            // prints out the ascii art
-            /*
-            Program.asciiArt = "minigame.txt";
-            string printOut = File.ReadAllText(filePath + Program.asciiArt);
-            Console.WriteLine(printOut);*/
-
             Console.WriteLine("Je belicht de kamer en ziet een geheime doorgang!");
             dotProgress();
 
@@ -736,25 +728,48 @@ namespace escapegame
             while (inMiniGame == true)
             {
                 Console.Clear();
-                Console.WriteLine("(Mini game) raad een getal tussen de 1 en de 10000 en -1 om terug te gaan: ");
-                int getal = Convert.ToInt16(Console.ReadLine());
-                if (getal < randGetal && getal >= 1)
+            
+                // prints out the ascii art
+                Program.asciiArt = "Easteregg.txt";
+                string printOut = File.ReadAllText(filePath + Program.asciiArt);
+                Console.WriteLine(printOut);
+
+                // loop only exits if input is valid numeric
+                bool inputIsNumeric = false;
+
+                // resets the global getal variable and prepares for new input
+                Program.getal = 0;
+               
+                while (inputIsNumeric == false)
+                {
+                    Console.WriteLine("(Mini game) raad een getal tussen de 1 en de 10000 en -1 om terug te gaan: ");
+                    string c = Console.ReadLine();
+                    
+                    if (int.TryParse(c, out getal))
+                    {
+                        getal = Convert.ToInt32(c);
+                        inputIsNumeric = true;
+                    }
+                }
+
+                if (Program.getal < randGetal && Program.getal >= 1)
                 {
                     Console.Beep(500, 500);
                     Console.WriteLine("Te laag!");
                     Console.ReadLine();
                 }
-                else if (getal > randGetal && getal >= 1)
+                else if (Program.getal > randGetal && Program.getal >= 1)
                 {
                     Console.Beep(3000, 500);
                     Console.WriteLine("Te hoog!");
                     Console.ReadLine();
                 }
-                else if (getal == randGetal && getal >= 1)
+                else if (Program.getal == randGetal && Program.getal >= 1)
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        Console.Beep(500, 250);
+                        Console.Beep(500, 500);
+                        Thread.Sleep(300);
                     }
                     Console.WriteLine("Dat was juist! Het nummer was: {0}", randGetal);
                     Console.ReadLine();
@@ -765,7 +780,7 @@ namespace escapegame
                     Thread.Sleep(moveRoomPause);
 
                 }
-                else if (getal == -1)
+                else if (Program.getal == -1)
                 {
                     inMiniGame = false;
                     Program.currentRoom = 4;
