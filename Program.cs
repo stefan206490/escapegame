@@ -472,7 +472,7 @@ namespace escapegame
                     Console.WriteLine("Je ziet een briefje onder de tafel liggen!");
                     dotProgress();
                     Console.WriteLine("\"Qr fyrhgry yvtg va qr xbryxnfg\"");
-                    Thread.Sleep(2000);
+                    dotProgress();
                     Console.WriteLine("Je realiseert dat dit briefje met ROT13 is gecodeerd");
 
                     Console.WriteLine("Wat staat er eigenlijk echt op het briefje? (Voer de ontcijferde tekst in):");
