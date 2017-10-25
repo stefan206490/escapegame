@@ -333,7 +333,7 @@ namespace escapegame
             {
                 Console.WriteLine("Objecten: kaars");
             }
-            else if (Program.hasCandle == false && Program.hasPaintingCode == false)
+            else if (Program.hasCandle == false && Program.hasPaintingCode == true)
             {
                 Console.WriteLine("Objecten: code: 264");
             }
