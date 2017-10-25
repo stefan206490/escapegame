@@ -15,12 +15,16 @@ namespace escapegame
         public static string asciiArt = null;
         public static string filePath = @"../../ascii/";
         public static bool[] roomVisited = new bool[6];
-        public static int tickRate = 1;
+        public static int tickRate = 10;
         public static int dialogueTickRate = 40;
         public static int dotProgressTickRate = 400;
         public static int moveRoomPause = 1000;
         public static int introTickRate = 3;
         public static int getal;
+
+        public static ThreadStart ts = new ThreadStart(Timer);
+        public static Thread TimerThread = new Thread(ts);
+        public static int intTimer = 1200;
 
         // inventory
         public static bool hasKitchenKey = false;
@@ -107,6 +111,17 @@ namespace escapegame
             Program.dialogueArray[12] = "(Je duwt je vriend uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
+        public static void Timer()
+        {
+            do
+            {
+                intTimer--;
+                Thread.Sleep(1000);
+            }
+            while (intTimer >= 0);
+            //Gameover stuff
+        }
+
         static bool mainMenu()
         {
             // will show welcome screen string with 100 ms pause between chars
@@ -144,14 +159,15 @@ namespace escapegame
                 }
 
                 // returns true to commence game
+                TimerThread.Start();
                 return true;
             }
             else if (menuChoice == "exit" || menuChoice == "2")
             {
                 // exits the game
                 Console.WriteLine("Game wordt afgesloten...");
-                Thread.Sleep(3000);
-                return false;
+                Thread.Sleep(2000);
+                return false; 
             }
             else
             {
@@ -189,17 +205,33 @@ namespace escapegame
                     break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
-                    Thread.Sleep(3000);
+                    Thread.Sleep(2000);
+                    TimerThread.Abort();
                     Program.inGame = false;
                     break;
             }
         }
 
+        static void timeGameOver()
+        {
+            Console.Clear();
+            Console.WriteLine("Sorry, je tijd is op. Game over!");
+            Console.ReadLine();
+            Program.currentRoom = 0;
+
+        }
+
         static int roomChoiceMenu2(string choice1, string choice2)
         {
+            if (intTimer <= 0)
+            {
+                timeGameOver();
+                return 0;
+            }
             string menuChoice = Console.ReadLine();
             if (menuChoice == choice1)
             {
+                
                 return 1;
             }
             else if (menuChoice == choice2)
@@ -225,6 +257,11 @@ namespace escapegame
 
         static int roomChoiceMenu3(string choice1, string choice2, string choice3)
         {
+            if (intTimer <= 0)
+            {
+                timeGameOver();
+                return 0;
+            }
             string menuChoice = Console.ReadLine();
             if (menuChoice == choice1)
             {
@@ -257,6 +294,11 @@ namespace escapegame
 
         static int roomChoiceMenu4(string choice1, string choice2, string choice3, string choice4)
         {
+            if (intTimer <= 0)
+            {
+                timeGameOver();
+                return 0;
+            }
             string menuChoice = Console.ReadLine();
             if (menuChoice == choice1)
             {
@@ -321,6 +363,23 @@ namespace escapegame
 
         static void printInventory()
         {
+            if (intTimer > 0)
+            {
+                string zeroSpace;
+                if (intTimer % 60 < 10 && intTimer > 0)
+                {
+                    zeroSpace = "0";
+                }
+                else if (intTimer % 60 == 0)
+                {
+                    zeroSpace = "00";
+                }
+                else
+                {
+                    zeroSpace = "";
+                }
+                Console.WriteLine("Timer: {0}:{1}{2}", intTimer / 60, zeroSpace, intTimer % 60);
+            }
             if (Program.hasKitchenKey == true && Program.hasLivingRoomKey == false)
             {
                 Console.WriteLine("Sleutels: keuken sleutel");
