@@ -664,7 +664,7 @@ namespace escapegame
                 }
                 else if (Program.hasBedroomKey == false)
                 {
-                    Console.WriteLine("Je geen sleutel om de rechter deur te openen.");
+                    Console.WriteLine("Je hebt geen sleutel om de rechter deur te openen.");
                     Console.ReadLine();
                 }
                 
