@@ -66,9 +66,15 @@ namespace escapegame
 
         static void cheatCodeFunction()
         {
+            // gives keys
             Program.hasKitchenKey = true;
             Program.hasLivingRoomKey = true;
             Program.hasBedroomKey = true;
+
+            // gives objects
+            Program.hasCandle = true;
+            Program.hasPaintingCode = true;
+
             Console.WriteLine("Cheat code geactiveerd!");
             Thread.Sleep(moveRoomPause);
         }
@@ -177,6 +183,9 @@ namespace escapegame
                     break;
                 case 7:
                     showCredits();
+                    break;
+                case 8:
+                    numberMiniGame();
                     break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
@@ -658,10 +667,19 @@ namespace escapegame
             // options
             string choiceSlaapkamer1 = "links";
             string choiceSlaapkamerEind = "rechts";
-            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer of [terug] of [exit]?");
+            string choiceCandle = "kaars";
+            if (Program.hasCandle == false)
+            {
+                Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [terug] of [exit]?");
+            }
+            else if (Program.hasCandle == true)
+            {
+                Console.WriteLine("Wil je naar de linker [links], rechter [rechts] slaapkamer of een [kaars] aansteken? of [terug] of [exit]?");
+            }
+            
 
             int choice = 0;
-            choice = roomChoiceMenu2(choiceSlaapkamer1, choiceSlaapkamerEind);
+            choice = roomChoiceMenu3(choiceSlaapkamer1, choiceSlaapkamerEind, choiceCandle);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de linker slaapkamer");
@@ -681,7 +699,11 @@ namespace escapegame
                     Console.WriteLine("Je hebt geen sleutel om de rechter deur te openen.");
                     Console.ReadLine();
                 }
-                
+
+            }
+            else if (choice == 3 && Program.hasCandle == true)
+            {
+                Program.currentRoom = 8;
             }
             else if (choice == 99)
             {
@@ -689,6 +711,69 @@ namespace escapegame
                 Program.currentRoom = 3;
                 Thread.Sleep(Program.moveRoomPause);
             }
+        }
+
+        static void numberMiniGame()
+        {
+            Console.Clear();
+
+            printInventory();
+
+            // prints out the ascii art
+            /*
+            Program.asciiArt = "minigame.txt";
+            string printOut = File.ReadAllText(filePath + Program.asciiArt);
+            Console.WriteLine(printOut);*/
+
+            Console.WriteLine("Je belicht de kamer en ziet een geheime doorgang!");
+            dotProgress();
+
+            Random rnd = new Random();
+            int randGetal = rnd.Next(1, 10001);
+
+            bool inMiniGame = true;
+
+            while (inMiniGame == true)
+            {
+                Console.Clear();
+                Console.WriteLine("(Mini game) raad een getal tussen de 1 en de 10000 en -1 om terug te gaan: ");
+                int getal = Convert.ToInt16(Console.ReadLine());
+                if (getal < randGetal && getal >= 1)
+                {
+                    Console.Beep(500, 500);
+                    Console.WriteLine("Te laag!");
+                    Console.ReadLine();
+                }
+                else if (getal > randGetal && getal >= 1)
+                {
+                    Console.Beep(3000, 500);
+                    Console.WriteLine("Te hoog!");
+                    Console.ReadLine();
+                }
+                else if (getal == randGetal && getal >= 1)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Console.Beep(500, 250);
+                    }
+                    Console.WriteLine("Dat was juist! Het nummer was: {0}", randGetal);
+                    Console.ReadLine();
+
+                    inMiniGame = false;
+                    Program.currentRoom = 4;
+                    Console.WriteLine("Mini game wordt afgesloten...");
+                    Thread.Sleep(moveRoomPause);
+
+                }
+                else if (getal == -1)
+                {
+                    inMiniGame = false;
+                    Program.currentRoom = 4;
+                    Console.WriteLine("Mini game wordt afgesloten...");
+                    Thread.Sleep(moveRoomPause);
+                }
+            }
+            
         }
 
         static void room5_bedroom1()
