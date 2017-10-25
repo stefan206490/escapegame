@@ -22,18 +22,17 @@ namespace escapegame
         public static int introTickRate = 3;
         public static int getal;
 
-        // holds value if you have found the ROT13 note.
-        public static bool noteSeen = false;
-
         // inventory
         public static bool hasKitchenKey = false;
         public static bool hasLivingRoomKey = false;
         public static bool hasBedroomKey = false;
 
         // environment changes
+        public static bool noteSeen = false;
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
         public static bool hasPaintingCode = false;
+        public static bool miniGameCompleted = false;
 
         public static bool hasCandle = false;
 
@@ -766,6 +765,7 @@ namespace escapegame
                     }
                     Console.WriteLine("Dat was juist! Het nummer was: {0}", randGetal);
                     Console.WriteLine("De cheatcode is: \"thereisnospoon1337\"\nVoer deze in bij de hal.");
+                    Program.miniGameCompleted = true;
                     Console.ReadLine();
 
                     inMiniGame = false;
@@ -980,6 +980,16 @@ namespace escapegame
                 Console.WriteLine(printOut);
                 
                 Console.WriteLine("Je bent samen met je vriend uit het huis ontsnapt! Game over.");
+            }
+
+            if (Program.hasCandle == true &&
+                Program.hasMovedChest == true &&
+                Program.hasMovedWardrobe == true &&
+                Program.hasPaintingCode == true &&
+                Program.miniGameCompleted == true &&
+                Program.noteSeen == true)
+            {
+                Console.WriteLine("Achievement: Completionist");
             }
             Program.currentRoom = 7;
             Console.ReadLine();
