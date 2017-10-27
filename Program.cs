@@ -32,6 +32,7 @@ namespace escapegame
         public static bool hasBedroomKey = false;
 
         // environment changes
+        public static bool firePlaceSeen = false;
         public static bool noteSeen = false;
         public static bool hasMovedChest = false;
         public static bool hasMovedWardrobe = false;
@@ -624,7 +625,16 @@ namespace escapegame
                 if (Program.noteSeen == true)
                 {
                     // hint if you have already found the note
-                    Console.WriteLine("Je ziet een stuk vlees op het spit hangen.\nJe bent hier al geweest, misschien moet je het briefje ontcijferen?");
+                    Console.WriteLine("Je ziet een stuk vlees op het spit hangen.");
+                    if (Program.firePlaceSeen == true)
+                    {
+                        Console.WriteLine("Je bent hier al geweest, misschien moet je naar het briefje kijken?");
+                    }
+                    Console.ReadLine();
+                }
+                else if (Program.firePlaceSeen == true)
+                {
+                    Console.WriteLine("Je ziet een stuk vlees op het spit hangen.\nJe bent hier al geweest.");
                     Console.ReadLine();
                 }
                 else
@@ -634,6 +644,7 @@ namespace escapegame
                     Console.WriteLine("Je ziet een stuk vlees op het spit hangen.");
                     Console.ReadLine();
                 }
+                Program.firePlaceSeen = true;
             }
             else if (choice == 99)
             {
