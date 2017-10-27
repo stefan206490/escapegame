@@ -333,6 +333,47 @@ namespace escapegame
             }
         }
 
+        static int roomChoiceMenu5(string choice1, string choice2, string choice3, string choice4, string choice5)
+        {
+            if (intTimer <= 0)
+            {
+                timeGameOver();
+                return 0;
+            }
+            string menuChoice = Console.ReadLine();
+            if (menuChoice == choice1)
+            {
+                return 1;
+            }
+            else if (menuChoice == choice2)
+            {
+                return 2;
+            }
+            else if (menuChoice == choice3)
+            {
+                return 3;
+            }
+            else if (menuChoice == choice4)
+            {
+                return 4;
+            }
+            else if (menuChoice == choice5)
+            {
+                return 5;
+            }
+            else if (menuChoice == "exit")
+            {
+                Program.currentRoom = 0;
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
+                Console.ReadLine();
+                return 0;
+            }
+        }
+
         static void printRoomStory(string story)
         {
             if (Program.roomVisited[Program.currentRoom - 1] == false)
@@ -626,14 +667,15 @@ namespace escapegame
             }
 
             // options
-            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel]/[trap] of [terug] of [exit]");
+            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel]/[trap] of [hal] of [exit]");
             string choiceKist = "kist";
             string choiceBoekenplank = "boekenplank";
             string choiceTafel = "tafel";
             string choiceStairs = "trap";
+            string choiceHall = "hal";
 
             int choice = 0;
-            choice = roomChoiceMenu4(choiceKist, choiceBoekenplank, choiceTafel, choiceStairs);
+            choice = roomChoiceMenu5(choiceKist, choiceBoekenplank, choiceTafel, choiceStairs, choiceHall);
             if (choice == 1)
             {
                 if (Program.hasCandle == false)
@@ -698,9 +740,8 @@ namespace escapegame
                     Program.currentRoom = 3;
                     Console.ReadLine();
                 }
-                
             }
-            else if (choice == 99)
+            else if (choice == 5)
             {
                 Console.WriteLine("Je besluit terug naar de hal te gaan...");
                 Program.currentRoom = 1;
@@ -727,11 +768,12 @@ namespace escapegame
             string choiceSlaapkamer1 = "links";
             string choiceSlaapkamerEind = "rechts";
             string choiceCandle = "kaars";
-            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [terug] of [exit]?");
+            string choiceLivingRoom = "woonkamer";
+            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [woonkamer] of [exit]?");
             
 
             int choice = 0;
-            choice = roomChoiceMenu3(choiceSlaapkamer1, choiceSlaapkamerEind, choiceCandle);
+            choice = roomChoiceMenu4(choiceSlaapkamer1, choiceSlaapkamerEind, choiceCandle, choiceLivingRoom);
             if (choice == 1)
             {
                 Console.WriteLine("Je gaat naar de linker slaapkamer");
@@ -757,7 +799,7 @@ namespace escapegame
             {
                 Program.currentRoom = 8;
             }
-            else if (choice == 99)
+            else if (choice == 4)
             {
                 Console.WriteLine("Je gaat terug naar de woonkamer.");
                 Program.currentRoom = 3;
