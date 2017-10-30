@@ -148,9 +148,11 @@ namespace escapegame
             string mainMenu = File.ReadAllText(filePath + asciiArt);
             Console.WriteLine(mainMenu);
 
+            Console.ReadLine();
+            
             bool validChoice = false;
             bool startGameChoice = false;
-            while (validChoice == false)
+            do
             {
                 // players gets to choose to start a new game or exit
                 Console.WriteLine("Schrijf [new]/[1] voor nieuwe game, schrijf [exit]/[2] om de game af te sluiten");
@@ -180,8 +182,9 @@ namespace escapegame
                 {
                     Console.WriteLine("Ongeldige keuze!");
                     Thread.Sleep(500);
+                    Console.Clear();
                 }
-                
+
                 if (validChoice == true && startGameChoice == true)
                 {
                     return true;
@@ -190,7 +193,7 @@ namespace escapegame
                 {
                     return false;
                 }
-            }
+            } while (validChoice == false);
             return false;
         }
 
