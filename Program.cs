@@ -187,11 +187,14 @@ namespace escapegame
 
                 if (validChoice == true && startGameChoice == true)
                 {
-                    return true;
-                }
-                else if (validChoice == true && startGameChoice == false)
-                {
-                    return false;
+                    if (startGameChoice == true)
+                    {
+                        return true;
+                    }
+                    else if (startGameChoice == false)
+                    {
+                        return false;
+                    }
                 }
             } while (validChoice == false);
             return false;
