@@ -62,7 +62,7 @@ namespace escapegame
             finalDialogue();
             Console.SetWindowSize(150, 45);
             Program.inGame = mainMenu();
-
+            
             while (Program.inGame == true)
             {
                 gameLoop(Program.currentRoom);
@@ -148,32 +148,50 @@ namespace escapegame
             string mainMenu = File.ReadAllText(filePath + asciiArt);
             Console.WriteLine(mainMenu);
 
-            // players gets to choose to start a new game or exit
-            Console.WriteLine("Schrijf [new]/[1] voor nieuwe game, schrijf [exit]/[2] om de game af te sluiten");
-            string menuChoice = Console.ReadLine();
-            if (menuChoice == "new" || menuChoice == "1")
+            bool validChoice = false;
+            bool startGameChoice = false;
+            while (validChoice == false)
             {
-                // sets all values in roomVisited array to false
-                for (int i = 0; i < roomVisited.Length; i++)
+                // players gets to choose to start a new game or exit
+                Console.WriteLine("Schrijf [new]/[1] voor nieuwe game, schrijf [exit]/[2] om de game af te sluiten");
+                string menuChoice = Console.ReadLine();
+                if (menuChoice == "new" || menuChoice == "1")
                 {
-                    Program.roomVisited[i] = false;
-                }
+                    // sets all values in roomVisited array to false
+                    for (int i = 0; i < roomVisited.Length; i++)
+                    {
+                        Program.roomVisited[i] = false;
+                    }
 
-                // returns true to commence game
-                TimerThread.Start();
-                return true;
+                    // returns true to commence game
+                    TimerThread.Start();
+                    validChoice = true;
+                    startGameChoice = true;
+                }
+                else if (menuChoice == "exit" || menuChoice == "2")
+                {
+                    // exits the game
+                    Console.WriteLine("Game wordt afgesloten...");
+                    Thread.Sleep(2000);
+                    validChoice = true;
+                    startGameChoice = false;
+                }
+                else
+                {
+                    Console.WriteLine("Ongeldige keuze!");
+                    Thread.Sleep(500);
+                }
+                
+                if (validChoice == true && startGameChoice == true)
+                {
+                    return true;
+                }
+                else if (validChoice == true && startGameChoice == false)
+                {
+                    return false;
+                }
             }
-            else if (menuChoice == "exit" || menuChoice == "2")
-            {
-                // exits the game
-                Console.WriteLine("Game wordt afgesloten...");
-                Thread.Sleep(2000);
-                return false; 
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         static void gameLoop(int roomNumber)
