@@ -170,7 +170,7 @@ namespace escapegame
                     validChoice = true;
                     startGameChoice = true;
                 }
-                else if (menuChoice == "Load" || menuChoice == "2")
+                else if (menuChoice == "load" || menuChoice == "2")
                 {
                     Program.load();
                     return true;
