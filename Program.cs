@@ -567,7 +567,7 @@ namespace escapegame
             }
             else if (Program.hasMovedWardrobe == true)
             {
-                Console.WriteLine("Kies: [keuken]/[woonkamer]/[schilderij] of [exit]");
+                Console.WriteLine("Kies: [keuken]/[woonkamer]/[schilderij] of [save] of [exit]");
             }
             
             string choiceKeuken = "keuken";
