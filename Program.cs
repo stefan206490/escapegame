@@ -1120,7 +1120,7 @@ namespace escapegame
                 Console.WriteLine("Je doorzoekt de kast");
                 dotProgress();
                 Console.WriteLine("Je vindt een briefje:");
-                Console.WriteLine("\"Er ligt een briefje met de code achter de schilderij in de hal.\"");
+                Console.WriteLine("\"Er ligt een briefje met de code achter het schilderij in de hal.\"");
                 Program.hasMovedWardrobe = true;
                 Console.ReadLine();
             }
