@@ -97,19 +97,19 @@ namespace escapegame
 
         static void finalDialogue()
         {
-            Program.dialogueArray[0] = "Vriend: Hallo, wie is daar?";
-            Program.dialogueArray[1] = "Ik: Ben jij dat vriend?";
-            Program.dialogueArray[2] = "Vriend: Ja ik ben het, hoe gaat het met jou?";
+            Program.dialogueArray[0] = "Jochem: Hallo, wie is daar?";
+            Program.dialogueArray[1] = "Ik: Ben jij dat Jochem?";
+            Program.dialogueArray[2] = "Jochem: Ja ik ben het, hoe gaat het met jou?";
             Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
             Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
-            Program.dialogueArray[5] = "Vriend: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
+            Program.dialogueArray[5] = "Jochem: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
             Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
-            Program.dialogueArray[7] = "Vriend: Hoe kunnen we hier wegkomen?";
+            Program.dialogueArray[7] = "Jochem: Hoe kunnen we hier wegkomen?";
             Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
-            Program.dialogueArray[9] = "Wil je je vriend uit het raam duwen? [ja]/[nee]";
+            Program.dialogueArray[9] = "Wil je je Jochem uit het raam duwen? [ja]/[nee]";
             Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
             Program.dialogueArray[11] = "Ik: Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
-            Program.dialogueArray[12] = "(Je duwt je vriend uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
+            Program.dialogueArray[12] = "(Je duwt je Jochem uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
         public static void Timer()
@@ -1163,7 +1163,7 @@ namespace escapegame
                 string printOut = File.ReadAllText(filePath + Program.asciiArt);
                 Console.WriteLine(printOut);
                 
-                Console.WriteLine("Je vriend is dood! Game over.");
+                Console.WriteLine("Jochem is dood! Game over.");
             }
             else
             {
@@ -1171,7 +1171,7 @@ namespace escapegame
                 string printOut = File.ReadAllText(filePath + Program.asciiArt);
                 Console.WriteLine(printOut);
                 
-                Console.WriteLine("Je bent samen met je vriend uit het huis ontsnapt! Game over.");
+                Console.WriteLine("Je bent samen met Jochem uit het huis ontsnapt! Game over.");
             }
 
             if (Program.hasCandle == true &&
