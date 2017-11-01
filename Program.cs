@@ -256,6 +256,9 @@ namespace escapegame
                 case 8:
                     numberMiniGame();
                     break;
+                case 9:
+                    debugMode();
+                    break;
                 default:
                     Console.WriteLine("Game wordt afgesloten");
                     Thread.Sleep(2000);
@@ -298,6 +301,11 @@ namespace escapegame
                 dotProgress();
                 return 8;
             }
+            else if (menuChoice == "debug")
+            {
+                Program.currentRoom = 9;
+                return 9;
+            }
             else if (menuChoice == "exit")
             {
                 Program.currentRoom = 0;
@@ -337,6 +345,11 @@ namespace escapegame
                 Console.WriteLine("Game wordt opgeslagen!");
                 dotProgress();
                 return 8;
+            }
+            else if (menuChoice == "debug")
+            {
+                Program.currentRoom = 9;
+                return 9;
             }
             else if (menuChoice == choice3)
             {
@@ -390,6 +403,11 @@ namespace escapegame
                 dotProgress();
                 return 8;
             }
+            else if (menuChoice == "debug")
+            {
+                Program.currentRoom = 9;
+                return 9;
+            }
             else if (menuChoice == "exit")
             {
                 Program.currentRoom = 0;
@@ -441,6 +459,56 @@ namespace escapegame
                 Console.WriteLine("Game wordt opgeslagen!");
                 dotProgress();
                 return 8;
+            }
+            else if (menuChoice == "debug")
+            {
+                Program.currentRoom = 9;
+                return 9;
+            }
+            else if (menuChoice == "exit")
+            {
+                Program.currentRoom = 0;
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
+                Console.ReadLine();
+                return 0;
+            }
+        }
+
+        static int roomChoiceMenu6(string choice1, string choice2, string choice3, string choice4, string choice5, string choice6)
+        {
+            if (intTimer <= 0)
+            {
+                timeGameOver();
+                return 0;
+            }
+            string menuChoice = Console.ReadLine();
+            if (menuChoice == choice1)
+            {
+                return 1;
+            }
+            else if (menuChoice == choice2)
+            {
+                return 2;
+            }
+            else if (menuChoice == choice3)
+            {
+                return 3;
+            }
+            else if (menuChoice == choice4)
+            {
+                return 4;
+            }
+            else if (menuChoice == choice5)
+            {
+                return 5;
+            }
+            else if (menuChoice == choice6)
+            {
+                return 6;
             }
             else if (menuChoice == "exit")
             {
@@ -1083,6 +1151,46 @@ namespace escapegame
             endingDialogue();
         }
 
+        static void debugMode()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Debug mode: [hal][woonkamer][keuken][trap][slaapkamer1][slaapkamer2] of [exit]");
+
+            string choiceHall = "hal";
+            string choiceLivingRoom = "woonkamer";
+            string choiceKitchen = "keuken";
+            string choiceStairs = "trap";
+            string choiceBedroomLeft = "slaapkamer1";
+            string choiceBedroomRight = "slaapkamer2";
+
+            int choice = roomChoiceMenu6(choiceHall, choiceKitchen, choiceLivingRoom, choiceStairs, choiceBedroomLeft, choiceBedroomRight);
+            switch (choice)
+            {
+                case 1:
+                    Program.currentRoom = 1;
+                    break;
+                case 2:
+                    Program.currentRoom = 2;
+                    break;
+                case 3:
+                    Program.currentRoom = 3;
+                    break;
+                case 4:
+                    Program.currentRoom = 4;
+                    break;
+                case 5:
+                    Program.currentRoom = 5;
+                    break;
+                case 6:
+                    Program.currentRoom = 6;
+                    break;
+                case 99:
+                    Program.currentRoom = 0;
+                    break;
+            }
+        }
+
         static void endingDialogue()
         {
             for (int i = 0; i < 3; i++)
@@ -1164,6 +1272,7 @@ namespace escapegame
                 Console.WriteLine(printOut);
                 
                 Console.WriteLine("Jochem is dood! Game over.");
+                Console.ReadLine();
             }
             else
             {
@@ -1172,6 +1281,7 @@ namespace escapegame
                 Console.WriteLine(printOut);
                 
                 Console.WriteLine("Je bent samen met Jochem uit het huis ontsnapt! Game over.");
+                Console.ReadLine();
             }
 
             if (Program.hasCandle == true &&
