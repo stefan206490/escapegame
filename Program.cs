@@ -148,14 +148,14 @@ namespace escapegame
             string mainMenu = File.ReadAllText(filePath + asciiArt);
             Console.WriteLine(mainMenu);
 
-            Console.ReadLine();
+            
             
             bool validChoice = false;
             bool startGameChoice = false;
             do
             {
                 // players gets to choose to start a new game or exit
-                Console.WriteLine("Schrijf [new]/[1] voor nieuwe game, schrijf [exit]/[2] om de game af te sluiten");
+                Console.WriteLine("Schrijf [new]/[1] voor nieuwe game,[load]/[2] om een opgeslagen game te laden of schrijf [exit]/[3] om de game af te sluiten");
                 string menuChoice = Console.ReadLine();
                 if (menuChoice == "new" || menuChoice == "1")
                 {
@@ -170,7 +170,12 @@ namespace escapegame
                     validChoice = true;
                     startGameChoice = true;
                 }
-                else if (menuChoice == "exit" || menuChoice == "2")
+                else if (menuChoice == "Load" || menuChoice == "2")
+                {
+                    Program.load();
+                    return true;
+                }
+                else if (menuChoice == "exit" || menuChoice == "3")
                 {
                     // exits the game
                     Console.WriteLine("Game wordt afgesloten...");
@@ -199,7 +204,30 @@ namespace escapegame
             } while (validChoice == false);
             return false;
         }
+        static void save()
+        {
+            string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString();
+            System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
+            savewriter.WriteLine(array); //Writes the document (string array)
+            savewriter.Close(); //Closes the stream
+        }
 
+        static void load()
+        {
+            string array = File.ReadAllText("SavedGame.txt"); //Reads the file
+            intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
+            hasKitchenKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(0));
+            hasLivingRoomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(1));
+            hasBedroomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(2));
+            firePlaceSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(3));
+            noteSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(4));
+            hasMovedChest = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(5));
+            hasMovedWardrobe= bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(6));
+            hasPaintingCode = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(7));
+            miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
+            hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
+            
+        }
         static void gameLoop(int roomNumber)
         {
             switch (Program.currentRoom)
@@ -256,12 +284,19 @@ namespace escapegame
             string menuChoice = Console.ReadLine();
             if (menuChoice == choice1)
             {
-                
+
                 return 1;
             }
             else if (menuChoice == choice2)
             {
                 return 2;
+            }
+            else if (menuChoice == "save")
+            {
+                Program.save();
+                Console.WriteLine("Game wordt opgeslagen!");
+                dotProgress();
+                return 8;
             }
             else if (menuChoice == "exit")
             {
@@ -295,6 +330,13 @@ namespace escapegame
             else if (menuChoice == choice2)
             {
                 return 2;
+            }
+            else if (menuChoice == "save")
+            {
+                Program.save();
+                Console.WriteLine("Game wordt opgeslagen!");
+                dotProgress();
+                return 8;
             }
             else if (menuChoice == choice3)
             {
@@ -341,6 +383,13 @@ namespace escapegame
             {
                 return 4;
             }
+            else if (menuChoice == "save")
+            {
+                Program.save();
+                Console.WriteLine("Game wordt opgeslagen!");
+                dotProgress();
+                return 8;
+            }
             else if (menuChoice == "exit")
             {
                 Program.currentRoom = 0;
@@ -385,6 +434,13 @@ namespace escapegame
             else if (menuChoice == choice5)
             {
                 return 5;
+            }
+            else if (menuChoice == "save")
+            {
+                Program.save();
+                Console.WriteLine("Game wordt opgeslagen!");
+                dotProgress();
+                return 8;
             }
             else if (menuChoice == "exit")
             {
@@ -507,7 +563,7 @@ namespace escapegame
 
             if (Program.hasMovedWardrobe == false)
             {
-                Console.WriteLine("Wil je naar de keuken of woonkamer? [keuken]/[woonkamer] of [exit]");
+                Console.WriteLine("Wil je naar de keuken of woonkamer? [keuken]/[woonkamer] of [save] of [exit]");
             }
             else if (Program.hasMovedWardrobe == true)
             {
@@ -576,7 +632,7 @@ namespace escapegame
             printRoomStory(kamerVerhaal[Program.currentRoom - 1]);
             
             // options
-            Console.WriteLine("Wat wil je doen in de keuken?\n[koelkast]/[tafel]/[haard] onderzoeken of [terug] of [exit]");
+            Console.WriteLine("Wat wil je doen in de keuken?\n[koelkast]/[tafel]/[haard] onderzoeken of [terug] of [save] of [exit]");
             string choiceKoelkast = "koelkast";
             string choiceTafel = "tafel";
             string choiceHaard = "haard";
@@ -702,7 +758,7 @@ namespace escapegame
             }
 
             // options
-            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel]/[trap] of [hal] of [exit]");
+            Console.WriteLine("Wil je de kist, boekenplank of tafel doorzoeken? [kist]/[boekenplank]/[tafel]/[trap] of [hal] of [save] of [exit]");
             string choiceKist = "kist";
             string choiceBoekenplank = "boekenplank";
             string choiceTafel = "tafel";
@@ -804,7 +860,7 @@ namespace escapegame
             string choiceSlaapkamerEind = "rechts";
             string choiceCandle = "kaars";
             string choiceLivingRoom = "woonkamer";
-            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [woonkamer] of [exit]?");
+            Console.WriteLine("Wil je naar de linker [links] of rechter [rechts] slaapkamer? of [woonkamer] of [save] of [exit]?");
             
 
             int choice = 0;
@@ -939,7 +995,7 @@ namespace escapegame
             string choiceChest = "kist";
             string choiceWardrobe = "kast";
             string choiceBed = "bed";
-            Console.WriteLine("Wil je de [kist]/[kast]/[bed] doorzoeken of [terug] of [exit]?");
+            Console.WriteLine("Wil je de [kist]/[kast]/[bed] doorzoeken of [terug] of [save] of [exit]?");
 
             int choice = 0;
             choice = roomChoiceMenu3(choiceChest, choiceWardrobe, choiceBed);
