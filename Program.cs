@@ -206,7 +206,7 @@ namespace escapegame
         }
         static void save()
         {
-            string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString();
+            string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
             System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
             savewriter.WriteLine(array); //Writes the document (string array)
             savewriter.Close(); //Closes the stream
@@ -226,7 +226,7 @@ namespace escapegame
             hasPaintingCode = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(7));
             miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
             hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
-            
+            currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
         }
         static void gameLoop(int roomNumber)
         {
