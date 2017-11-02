@@ -746,6 +746,8 @@ namespace escapegame
                     Thread.Sleep(1000);
                     dotProgress();
                     Console.WriteLine("Je realiseert dat dit briefje met ROT13 is gecodeerd");
+                    //Het is niet duidelijk. "Je ontdekt op de tafel een briefje waar een bepaalde code op staat"
+                    //Internet(?) hint
 
                     Console.WriteLine("Wat staat er eigenlijk echt op het briefje? (Voer de ontcijferde tekst in):");
                     string ROT13Code = Console.ReadLine();
