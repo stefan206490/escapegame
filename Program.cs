@@ -230,6 +230,12 @@ namespace escapegame
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
             }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze probeer opnieuw!");
+                Thread.Sleep(2000);
+                Program.save();
+            }
             
             
         }
@@ -286,6 +292,13 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
+            }
+            else
+            {
+                Console.WriteLine("Ongeldige keuze probeer opnieuw!");
+                Thread.Sleep(2000);
+                Program.load();
+                
             }
         
 
