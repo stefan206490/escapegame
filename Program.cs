@@ -206,27 +206,89 @@ namespace escapegame
         }
         static void save()
         {
-            string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
-            System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
-            savewriter.WriteLine(array); //Writes the document (string array)
-            savewriter.Close(); //Closes the stream
+            Console.WriteLine("In welke slot wilt u het spel opslaan? [1-3]");
+            string savechoice = Console.ReadLine();
+
+            if (savechoice == "1")
+            {
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
+                savewriter.WriteLine(array); //Writes the document (string array)
+                savewriter.Close(); //Closes the stream
+            }
+            else if (savechoice == "2")
+            {
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame1.txt"); //Picks up the place and the Streamwriter
+                savewriter.WriteLine(array); //Writes the document (string array)
+                savewriter.Close(); //Closes the stream
+            }
+            else if (savechoice == "3")
+            {
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame2.txt"); //Picks up the place and the Streamwriter
+                savewriter.WriteLine(array); //Writes the document (string array)
+                savewriter.Close(); //Closes the stream
+            }
+            
+            
         }
 
         static void load()
         {
-            string array = File.ReadAllText("SavedGame.txt"); //Reads the file
-            intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
-            hasKitchenKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(0));
-            hasLivingRoomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(1));
-            hasBedroomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(2));
-            firePlaceSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(3));
-            noteSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(4));
-            hasMovedChest = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(5));
-            hasMovedWardrobe= bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(6));
-            hasPaintingCode = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(7));
-            miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
-            hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
-            currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
+            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
+            string loadchoice = Console.ReadLine();
+
+            if (loadchoice == "1")
+            {
+                string array = File.ReadAllText("SavedGame.txt"); //Reads the file
+                intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
+                hasKitchenKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(0));
+                hasLivingRoomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(1));
+                hasBedroomKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(2));
+                firePlaceSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(3));
+                noteSeen = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(4));
+                hasMovedChest = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(5));
+                hasMovedWardrobe = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(6));
+                hasPaintingCode = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(7));
+                miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
+                hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
+                currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
+            }
+            else if (loadchoice == "2")
+            {
+                string array = File.ReadAllText("SavedGame1.txt"); //Reads the file
+                intTimer = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
+                hasKitchenKey = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(0));
+                hasLivingRoomKey = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(1));
+                hasBedroomKey = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(2));
+                firePlaceSeen = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(3));
+                noteSeen = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(4));
+                hasMovedChest = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(5));
+                hasMovedWardrobe = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(6));
+                hasPaintingCode = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(7));
+                miniGameCompleted = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(8));
+                hasCandle = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(9));
+                currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
+            }
+            else if (loadchoice == "3")
+            {
+                string array = File.ReadAllText("SavedGame2.txt"); //Reads the file
+                intTimer = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
+                hasKitchenKey = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(0));
+                hasLivingRoomKey = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(1));
+                hasBedroomKey = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(2));
+                firePlaceSeen = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(3));
+                noteSeen = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(4));
+                hasMovedChest = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(5));
+                hasMovedWardrobe = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(6));
+                hasPaintingCode = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(7));
+                miniGameCompleted = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(8));
+                hasCandle = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(9));
+                currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
+            }
+        
+
         }
         static void gameLoop(int roomNumber)
         {
