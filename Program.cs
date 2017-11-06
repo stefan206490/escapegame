@@ -317,9 +317,6 @@ namespace escapegame
                 Program.load();
                 return false;
             }
-            
-            
-        
 
         }
         static void gameLoop(int roomNumber)
@@ -368,7 +365,6 @@ namespace escapegame
             Console.WriteLine("Sorry, je tijd is op. Game over!");
             Console.ReadLine();
             Program.currentRoom = 0;
-
         }
 
         static int roomChoiceMenu2(string choice1, string choice2)
