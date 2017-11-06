@@ -245,7 +245,7 @@ namespace escapegame
             Console.WriteLine("Welke slot wilt u inladen?[1-3]");
             string loadchoice = Console.ReadLine();
 
-            if (loadchoice == "1")
+            if (File.Exists("..\\SavedGame.txt"+ (loadchoice == "1")))
             {
                 string array = File.ReadAllText("SavedGame.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
