@@ -249,8 +249,8 @@ namespace escapegame
             Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
             string loadchoice = Console.ReadLine();
 
-            if (File.Exists("..\\SavedGame.txt" + (loadchoice == "1")))
-            {
+            if (File.Exists("SavedGame.txt") && loadchoice == "1")
+                {
                 string array = File.ReadAllText("SavedGame.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
                 hasKitchenKey = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(0));
@@ -268,7 +268,7 @@ namespace escapegame
                 TimerThread.Start();
                 return true;
             }
-            else if (File.Exists("..\\SavedGame1.txt" + (loadchoice == "2")))
+            else if (File.Exists("SavedGame1.txt") && loadchoice == "2")
             {
                 string array = File.ReadAllText("SavedGame1.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
@@ -287,7 +287,7 @@ namespace escapegame
                 TimerThread.Start();
                 return true;
             }
-            else if (File.Exists("..\\SavedGame2.txt" + (loadchoice == "3")))
+            else if (File.Exists("SavedGame2.txt") && loadchoice == "3")
             {
                 string array = File.ReadAllText("SavedGame2.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
