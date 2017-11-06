@@ -186,6 +186,11 @@ namespace escapegame
                     Console.WriteLine("Ongeldige keuze!");
                     Thread.Sleep(500);
                     Console.Clear();
+                    Console.WriteLine(mainMenuString);
+                    Console.WriteLine(introText);
+                    Program.asciiArt = "mainmenu.txt";
+                    string VmainMenu = File.ReadAllText(filePath + asciiArt);
+                    Console.WriteLine(VmainMenu);
                 }
 
                 if (validChoice == true && startGameChoice == true)
