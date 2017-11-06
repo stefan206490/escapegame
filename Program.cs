@@ -106,7 +106,7 @@ namespace escapegame
             Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
             Program.dialogueArray[7] = "Jochem: Hoe kunnen we hier wegkomen?";
             Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
-            Program.dialogueArray[9] = "Wil je je Jochem uit het raam duwen? [ja]/[nee]";
+            Program.dialogueArray[9] = "Wil je Jochem uit het raam duwen? [ja]/[nee]";
             Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
             Program.dialogueArray[11] = "Ik: Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
             Program.dialogueArray[12] = "(Je duwt Jochem uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
