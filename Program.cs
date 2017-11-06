@@ -234,8 +234,6 @@ namespace escapegame
                 Thread.Sleep(2000);
                 Program.save();
             }
-            
-            
         }
 
         static void load()
