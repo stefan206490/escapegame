@@ -414,7 +414,7 @@ namespace escapegame
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
-                Console.ReadLine();
+                Thread.Sleep(2000);
                 return 0;
             }
         }
@@ -465,7 +465,7 @@ namespace escapegame
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
-                Console.ReadLine();
+                Thread.Sleep(2000);
                 return 0;
             }
         }
@@ -520,7 +520,7 @@ namespace escapegame
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
-                Console.ReadLine();
+                Thread.Sleep(2000);
                 return 0;
             }
         }
@@ -575,7 +575,7 @@ namespace escapegame
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
-                Console.ReadLine();
+                Thread.Sleep(2000);
                 return 0;
             }
         }
@@ -620,7 +620,7 @@ namespace escapegame
             else
             {
                 Console.WriteLine("Ongeldige keuze! Probeer opnieuw");
-                Console.ReadLine();
+                Thread.Sleep(2000);
                 return 0;
             }
         }
