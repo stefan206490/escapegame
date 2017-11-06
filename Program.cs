@@ -147,8 +147,6 @@ namespace escapegame
             Program.asciiArt = "mainmenu.txt";
             string mainMenu = File.ReadAllText(filePath + asciiArt);
             Console.WriteLine(mainMenu);
-
-            
             
             bool validChoice = false;
             bool startGameChoice = false;
@@ -260,6 +258,8 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
+
+                TimerThread.Start();
             }
             else if (loadchoice == "2")
             {
@@ -276,6 +276,8 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
+
+                TimerThread.Start();
             }
             else if (loadchoice == "3")
             {
@@ -292,6 +294,8 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
+
+                TimerThread.Start();
             }
             else
             {
