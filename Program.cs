@@ -202,9 +202,9 @@ namespace escapegame
             } while (validChoice == false);
             return false;
         }
-        static void save()
+        static bool save()
         {
-            Console.WriteLine("In welke slot wilt u het spel opslaan? [1-3]");
+            Console.WriteLine("In welke slot wilt u het spel opslaan? [1-3] of [-1] om verder te gaan zonder het spel op te slaan");
             string savechoice = Console.ReadLine();
 
             if (savechoice == "1")
@@ -213,6 +213,7 @@ namespace escapegame
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
+                return true;
             }
             else if (savechoice == "2")
             {
@@ -220,6 +221,7 @@ namespace escapegame
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame1.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
+                return true;
             }
             else if (savechoice == "3")
             {
@@ -227,21 +229,27 @@ namespace escapegame
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame2.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
+                return true;
+            }
+            else if (savechoice == "-1")
+            {
+                return false;
             }
             else
             {
                 Console.WriteLine("Ongeldige keuze probeer opnieuw!");
                 Thread.Sleep(2000);
                 Program.save();
+                return false;
             }
         }
 
-        static void load()
+        static bool load()
         {
-            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
+            Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
             string loadchoice = Console.ReadLine();
 
-            if (loadchoice == "1")
+            if (File.Exists("..\\SavedGame.txt" + (loadchoice == "1")))
             {
                 string array = File.ReadAllText("SavedGame.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
@@ -258,8 +266,9 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
             }
-            else if (loadchoice == "2")
+            else if (File.Exists("..\\SavedGame1.txt" + (loadchoice == "2")))
             {
                 string array = File.ReadAllText("SavedGame1.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
@@ -276,8 +285,9 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
             }
-            else if (loadchoice == "3")
+            else if (File.Exists("..\\SavedGame2.txt" + (loadchoice == "3")))
             {
                 string array = File.ReadAllText("SavedGame2.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
@@ -294,14 +304,21 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
+            }
+            else if (loadchoice == "-1")
+            {
+                return false;
             }
             else
             {
-                Console.WriteLine("Ongeldige keuze probeer opnieuw!");
+                Console.WriteLine("Lege save file/ongeldige keuze probeer opnieuw!");
                 Thread.Sleep(2000);
                 Program.load();
-                
+                return false;
             }
+            
+            
         
 
         }
@@ -373,9 +390,11 @@ namespace escapegame
             }
             else if (menuChoice == "save")
             {
-                Program.save();
-                Console.WriteLine("Game wordt opgeslagen!");
-                dotProgress();
+                if (Program.save() == true)
+                {
+                    Console.WriteLine("Game wordt opgeslagen!");
+                    dotProgress();
+                }
                 return 8;
             }
             else if (menuChoice == "debug")
@@ -418,9 +437,11 @@ namespace escapegame
             }
             else if (menuChoice == "save")
             {
-                Program.save();
-                Console.WriteLine("Game wordt opgeslagen!");
-                dotProgress();
+                if (Program.save() == true)
+                {
+                    Console.WriteLine("Game wordt opgeslagen!");
+                    dotProgress();
+                }
                 return 8;
             }
             else if (menuChoice == "debug")
@@ -475,9 +496,11 @@ namespace escapegame
             }
             else if (menuChoice == "save")
             {
-                Program.save();
-                Console.WriteLine("Game wordt opgeslagen!");
-                dotProgress();
+                if (Program.save() == true)
+                {
+                    Console.WriteLine("Game wordt opgeslagen!");
+                    dotProgress();
+                }
                 return 8;
             }
             else if (menuChoice == "debug")
@@ -532,9 +555,11 @@ namespace escapegame
             }
             else if (menuChoice == "save")
             {
-                Program.save();
-                Console.WriteLine("Game wordt opgeslagen!");
-                dotProgress();
+                if (Program.save() == true)
+                {
+                    Console.WriteLine("Game wordt opgeslagen!");
+                    dotProgress();
+                }
                 return 8;
             }
             else if (menuChoice == "debug")
