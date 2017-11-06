@@ -308,6 +308,7 @@ namespace escapegame
             }
             else if (loadchoice == "-1")
             {
+                TimerThread.Start();
                 return false;
             }
             else
