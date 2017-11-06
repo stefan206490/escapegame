@@ -244,12 +244,12 @@ namespace escapegame
             }
         }
 
-        static void load()
+        static bool load()
         {
-            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
+            Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
             string loadchoice = Console.ReadLine();
 
-            if (File.Exists("..\\SavedGame.txt"+ (loadchoice == "1")))
+            if (File.Exists("..\\SavedGame.txt" + (loadchoice == "1")))
             {
                 string array = File.ReadAllText("SavedGame.txt"); //Reads the file
                 intTimer = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(10)); //Reads every line 1 by 1 and converts it to bool
@@ -266,6 +266,7 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
             }
             else if (File.Exists("..\\SavedGame1.txt" + (loadchoice == "2")))
             {
@@ -284,6 +285,7 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
             }
             else if (File.Exists("..\\SavedGame2.txt" + (loadchoice == "3")))
             {
@@ -302,12 +304,18 @@ namespace escapegame
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
 
                 TimerThread.Start();
+                return true;
+            }
+            else if (loadchoice == "-1")
+            {
+                return false;
             }
             else
             {
                 Console.WriteLine("Lege save file/ongeldige keuze probeer opnieuw!");
                 Thread.Sleep(2000);
                 Program.load();
+                return false;
             }
             
             
