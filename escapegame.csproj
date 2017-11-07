@@ -54,6 +54,8 @@
     <Content Include="ascii\Easteregg.txt" />
     <Content Include="ascii\EndingBad.txt" />
     <Content Include="ascii\EndingGood.txt" />
+    <Content Include="ascii\EndingJa.txt" />
+    <Content Include="ascii\EndingNee.txt" />
     <Content Include="ascii\Hal.txt" />
     <Content Include="ascii\Kitchen.txt" />
     <Content Include="ascii\Livingroom.txt" />

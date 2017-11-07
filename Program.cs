@@ -1353,14 +1353,23 @@ namespace escapegame
                 dialogueChoice2 = Console.ReadLine();
                 if (dialogueChoice2 == "nee")
                 {
+                    Console.Clear();
+                    Program.asciiArt = ("EndingNee.txt");
+                    string printOut = (File.ReadAllText(filePath + Program.asciiArt));
+                    Console.WriteLine(printOut);
                     printDialogue(Program.dialogueArray[10]);
                     Thread.Sleep(moveRoomPause);
                     break;
                 }
                 else if (dialogueChoice2 == "ja")
                 {
+                    Console.Clear();
+                    Program.asciiArt = ("EndingJa.txt");
+                    string printOut = File.ReadAllText(filePath + Program.asciiArt);
+                    Console.WriteLine(printOut);
                     for (int j = 11; j < 13; j++)
                     {
+                        
                         printDialogue(Program.dialogueArray[j]);
                         Thread.Sleep(moveRoomPause);
                     }
@@ -1405,7 +1414,7 @@ namespace escapegame
                 Console.WriteLine("Achievement: Completionist");
             }
             Program.currentRoom = 7;
-            Console.ReadLine();
+            
         }
 
         static void showCredits()
