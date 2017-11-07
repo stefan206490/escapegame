@@ -99,7 +99,7 @@ namespace escapegame
         {
             Program.dialogueArray[0] = "Jochem: Hallo, wie is daar?";
             Program.dialogueArray[1] = "Ik: Ben jij dat Jochem?";
-            Program.dialogueArray[2] = "Jochem: Ja ik ben het, hoe gaat het met jou?";
+            Program.dialogueArray[2] = "Jochem: Ja, ik ben het. Hoe gaat het met jou?";
             Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
             Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
             Program.dialogueArray[5] = "Jochem: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
