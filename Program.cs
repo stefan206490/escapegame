@@ -1116,7 +1116,7 @@ namespace escapegame
                     Console.WriteLine("Te laag!");
                     Console.ReadLine();
                 }
-                else if (Program.getal > randGetal && Program.getal >= 1)
+                else if (Program.getal > randGetal && Program.getal >= 1 && Program.getal <= 10000)
                 {
                     Console.Beep(3000, 500);
                     Console.WriteLine("Te hoog!");
@@ -1139,6 +1139,11 @@ namespace escapegame
                     Console.WriteLine("Mini game wordt afgesloten...");
                     Thread.Sleep(moveRoomPause);
 
+                }
+                else if (Program.getal > 10000)
+                {
+                    Console.WriteLine("Ongeldige keuze! Probeer opnieuw!");
+                    Console.ReadLine();
                 }
                 else if (Program.getal == -1)
                 {
