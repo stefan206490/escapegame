@@ -268,7 +268,7 @@ namespace escapegame
             Console.WriteLine("Welke slot wilt u inladen?[1-3]");
             if (File.Exists("SavedGame.txt"))
             {
-                Console.WriteLine(File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
+                Console.WriteLine("1)" + File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
             }
             else
             {
@@ -277,7 +277,7 @@ namespace escapegame
 
             if (File.Exists("SavedGame1.txt"))
             {
-                Console.WriteLine(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
+                Console.WriteLine("2)" + File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
             }
             else
             {
@@ -286,7 +286,7 @@ namespace escapegame
 
             if (File.Exists("SavedGame2.txt"))
             {
-                Console.WriteLine(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
+                Console.WriteLine("3)" + File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
             }
             else
             {
