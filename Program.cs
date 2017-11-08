@@ -275,7 +275,7 @@ namespace escapegame
                 Console.WriteLine("Leeg save slot.");
             }
 
-            if (File.Exists("SavedGame.txt1"))
+            if (File.Exists("SavedGame1.txt"))
             {
                 Console.WriteLine(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
             }
@@ -284,7 +284,7 @@ namespace escapegame
                 Console.WriteLine("Leeg save slot.");
             }
 
-            if (File.Exists("SavedGame.txt2"))
+            if (File.Exists("SavedGame2.txt"))
             {
                 Console.WriteLine(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
             }
