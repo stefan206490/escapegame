@@ -10,6 +10,7 @@ namespace escapegame
 {
     class Program
     {
+        public static string Title { get; set; }
         public static int currentRoom = 1;
         public static bool inGame = false;
         public static string asciiArt = null;
@@ -214,7 +215,10 @@ namespace escapegame
 
             if (savechoice == "1")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                Console.WriteLine("Geef een naam voor die save slot");
+                string save1 = Console.ReadLine();
+
+                string array =hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + save1.ToString();
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
@@ -222,16 +226,22 @@ namespace escapegame
             }
             else if (savechoice == "2")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
-                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame1.txt"); //Picks up the place and the Streamwriter
+                Console.WriteLine("Geef een naam voor die save slot");
+                string save2 = Console.ReadLine();
+
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + save2.ToString(); ;
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
                 return true;
             }
             else if (savechoice == "3")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
-                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame2.txt"); //Picks up the place and the Streamwriter
+                Console.WriteLine("Geef een naam voor die save slot");
+                string save3 = Console.ReadLine();
+
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + save3.ToString(); ;
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
                 return true;
@@ -252,7 +262,34 @@ namespace escapegame
         static bool load()
         {
             Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
+            if (File.Exists("SavedGame.txt"))
+            {
+                Console.WriteLine(File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
+
+            if (File.Exists("SavedGame.txt1"))
+            {
+                Console.WriteLine(File.ReadLines("SavedGame.txt1").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
+
+            if (File.Exists("SavedGame.txt2"))
+            {
+                Console.WriteLine(File.ReadLines("SavedGame.txt2").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
             string loadchoice = Console.ReadLine();
+
 
             if (File.Exists("SavedGame.txt") && loadchoice == "1")
                 {
