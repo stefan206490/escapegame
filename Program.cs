@@ -277,7 +277,7 @@ namespace escapegame
 
             if (File.Exists("SavedGame.txt1"))
             {
-                Console.WriteLine(File.ReadLines("SavedGame.txt1").ElementAtOrDefault(12));
+                Console.WriteLine(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
             }
             else
             {
@@ -286,7 +286,7 @@ namespace escapegame
 
             if (File.Exists("SavedGame.txt2"))
             {
-                Console.WriteLine(File.ReadLines("SavedGame.txt2").ElementAtOrDefault(12));
+                Console.WriteLine(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
             }
             else
             {
