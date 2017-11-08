@@ -236,7 +236,7 @@ namespace escapegame
             else if (savechoice == "2")
             {
                 string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + Program.playerName.ToString();
-                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame1.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
                 return true;
@@ -245,7 +245,7 @@ namespace escapegame
             {
 
                 string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + Program.playerName.ToString();
-                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
+                System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame2.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
                 return true;
