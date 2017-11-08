@@ -206,7 +206,7 @@ namespace escapegame
 
                     Console.WriteLine("Uw naam is:");
                     Console.WriteLine(playerName);
-                    Console.ReadLine();
+                    Thread.Sleep(1500);
                 }
                 
 
