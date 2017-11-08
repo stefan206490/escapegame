@@ -27,6 +27,8 @@ namespace escapegame
         public static Thread TimerThread = new Thread(ts);
         public static int intTimer = 1200;
 
+        public static string playerName;
+
         // inventory
         public static bool hasKitchenKey = false;
         public static bool hasLivingRoomKey = false;
@@ -60,10 +62,13 @@ namespace escapegame
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
-            finalDialogue();
+            
             Console.SetWindowSize(150, 45);
             Program.inGame = mainMenu();
-            
+
+            // important to load dialogue lines AFTER mainMenu()
+            finalDialogue();
+
             while (Program.inGame == true)
             {
                 gameLoop(Program.currentRoom);
@@ -99,17 +104,17 @@ namespace escapegame
         static void finalDialogue()
         {
             Program.dialogueArray[0] = "Jochem: Hallo, wie is daar?";
-            Program.dialogueArray[1] = "Ik: Ben jij dat Jochem?";
-            Program.dialogueArray[2] = "Jochem: Ja ik ben het, hoe gaat het met jou?";
-            Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
-            Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
+            Program.dialogueArray[1] = Program.playerName + ": Ben jij dat Jochem?";
+            Program.dialogueArray[2] = "Jochem: Ja, ik ben het. Hoe gaat het met jou?";
+            Program.dialogueArray[3] = Program.playerName + ": Het gaat goed met mij. De heks heeft niks opgemerkt.";
+            Program.dialogueArray[4] = Program.playerName + ": Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
             Program.dialogueArray[5] = "Jochem: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
-            Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
-            Program.dialogueArray[7] = "Jochem: Hoe kunnen we hier wegkomen?";
-            Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
+            Program.dialogueArray[6] = Program.playerName + ": Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
+            Program.dialogueArray[7] = Program.playerName + "Jochem: Hoe kunnen we hier wegkomen?";
+            Program.dialogueArray[8] = Program.playerName + ": Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
             Program.dialogueArray[9] = "Wil je Jochem uit het raam duwen? [ja]/[nee]";
-            Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
-            Program.dialogueArray[11] = "Ik: Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
+            Program.dialogueArray[10] = Program.playerName + ": Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
+            Program.dialogueArray[11] = Program.playerName + ": Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
             Program.dialogueArray[12] = "(Je duwt Jochem uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
@@ -193,6 +198,13 @@ namespace escapegame
                     string VmainMenu = File.ReadAllText(filePath + asciiArt);
                     Console.WriteLine(VmainMenu);
                 }
+
+                Console.WriteLine("Voer uw naam in:");
+                Program.playerName = Console.ReadLine();
+
+                Console.WriteLine("Uw naam is:");
+                Console.WriteLine(playerName);
+                Console.ReadLine();
 
                 if (validChoice == true && startGameChoice == true)
                 {
