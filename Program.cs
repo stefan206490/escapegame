@@ -10,6 +10,7 @@ namespace escapegame
 {
     class Program
     {
+        public static string Title { get; set; }
         public static int currentRoom = 1;
         public static bool inGame = false;
         public static string asciiArt = null;
@@ -25,6 +26,8 @@ namespace escapegame
         public static ThreadStart ts = new ThreadStart(Timer);
         public static Thread TimerThread = new Thread(ts);
         public static int intTimer = 1200;
+
+        public static string playerName;
 
         // inventory
         public static bool hasKitchenKey = false;
@@ -59,10 +62,13 @@ namespace escapegame
         static void Main(string[] args)
         {
             kamerVerhaalFunctie();
-            finalDialogue();
+            
             Console.SetWindowSize(150, 45);
             Program.inGame = mainMenu();
-            
+
+            // important to load dialogue lines AFTER mainMenu()
+            finalDialogue();
+
             while (Program.inGame == true)
             {
                 gameLoop(Program.currentRoom);
@@ -98,17 +104,17 @@ namespace escapegame
         static void finalDialogue()
         {
             Program.dialogueArray[0] = "Jochem: Hallo, wie is daar?";
-            Program.dialogueArray[1] = "Ik: Ben jij dat Jochem?";
+            Program.dialogueArray[1] = Program.playerName + ": Ben jij dat Jochem?";
             Program.dialogueArray[2] = "Jochem: Ja, ik ben het. Hoe gaat het met jou?";
-            Program.dialogueArray[3] = "Ik: Het gaat goed met mij. De heks heeft niks opgemerkt.";
-            Program.dialogueArray[4] = "Ik: Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
+            Program.dialogueArray[3] = Program.playerName + ": Het gaat goed met mij. De heks heeft niks opgemerkt.";
+            Program.dialogueArray[4] = Program.playerName + ": Nee het gaat niet goed! Ik was doodongerust over jou. Hoe heb je je ooit kunnen laten opsluiten door die oude taart!?";
             Program.dialogueArray[5] = "Jochem: Je zegt het alsof het mijn schuld is dat ik hier opgesloten zit.";
-            Program.dialogueArray[6] = "Ik: Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
+            Program.dialogueArray[6] = Program.playerName + ": Hoe dan ook laten hier snel weg wezen voordat de heks terugkomt.";
             Program.dialogueArray[7] = "Jochem: Hoe kunnen we hier wegkomen?";
-            Program.dialogueArray[8] = "Ik: Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
+            Program.dialogueArray[8] = Program.playerName + ": Tegen het raam staat een ladder, daarmee kunnen we uit het raam klimmen.";
             Program.dialogueArray[9] = "Wil je Jochem uit het raam duwen? [ja]/[nee]";
-            Program.dialogueArray[10] = "Ik: Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
-            Program.dialogueArray[11] = "Ik: Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
+            Program.dialogueArray[10] = Program.playerName + ": Ga snel via de ladder naar beneden. Alleen zo komen we weg uit dit huis.";
+            Program.dialogueArray[11] = Program.playerName + ": Sorry, je ouders denken al dat je dood bent. Je bent het niet waard om hier levend uit te komen.";
             Program.dialogueArray[12] = "(Je duwt Jochem uit het raam, hij valt op zijn hoofd. Je bent zelf ontsnapt)";
         }
 
@@ -193,6 +199,17 @@ namespace escapegame
                     Console.WriteLine(VmainMenu);
                 }
 
+                if (menuChoice == "new" || menuChoice == "1")
+                {
+                    Console.WriteLine("Voer uw naam in:");
+                    Program.playerName = Console.ReadLine();
+
+                    Console.WriteLine("Uw naam is:");
+                    Console.WriteLine(playerName);
+                    Thread.Sleep(1500);
+                }
+                
+
                 if (validChoice == true && startGameChoice == true)
                 {
                     if (startGameChoice == true)
@@ -214,7 +231,7 @@ namespace escapegame
 
             if (savechoice == "1")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                string array =hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + Program.playerName.ToString();
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
@@ -222,7 +239,7 @@ namespace escapegame
             }
             else if (savechoice == "2")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + Program.playerName.ToString();
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame1.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
@@ -230,7 +247,8 @@ namespace escapegame
             }
             else if (savechoice == "3")
             {
-                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString();
+
+                string array = hasKitchenKey.ToString() + "\r\n" + hasLivingRoomKey.ToString() + "\r\n" + hasBedroomKey.ToString() + "\r\n" + firePlaceSeen.ToString() + "\r\n" + noteSeen.ToString() + "\r\n" + hasMovedChest.ToString() + "\r\n" + hasMovedWardrobe.ToString() + "\r\n" + hasPaintingCode.ToString() + "\r\n" + miniGameCompleted.ToString() + "\r\n" + hasCandle.ToString() + "\r\n" + intTimer.ToString() + "\r\n" + currentRoom.ToString() + "\r\n" + Program.playerName.ToString();
                 System.IO.StreamWriter savewriter = new System.IO.StreamWriter("SavedGame2.txt"); //Picks up the place and the Streamwriter
                 savewriter.WriteLine(array); //Writes the document (string array)
                 savewriter.Close(); //Closes the stream
@@ -251,8 +269,35 @@ namespace escapegame
 
         static bool load()
         {
-            Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
+            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
+            if (File.Exists("SavedGame.txt"))
+            {
+                Console.WriteLine("1)" + File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
+
+            if (File.Exists("SavedGame1.txt"))
+            {
+                Console.WriteLine("2)" + File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
+
+            if (File.Exists("SavedGame2.txt"))
+            {
+                Console.WriteLine("3)" + File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
+            }
+            else
+            {
+                Console.WriteLine("Leeg save slot.");
+            }
             string loadchoice = Console.ReadLine();
+
 
             if (File.Exists("SavedGame.txt") && loadchoice == "1")
                 {
@@ -269,6 +314,7 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
+                Program.playerName=(File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
 
                 TimerThread.Start();
                 return true;
@@ -288,6 +334,7 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
+                Program.playerName = (File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
 
                 TimerThread.Start();
                 return true;
@@ -307,14 +354,11 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
+                Program.playerName = (File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
+
 
                 TimerThread.Start();
                 return true;
-            }
-            else if (loadchoice == "-1")
-            {
-                TimerThread.Start();
-                return false;
             }
             else
             {
