@@ -49,20 +49,48 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ascii\Bedroom1.txt" />
-    <Content Include="ascii\Bedroom2.txt" />
-    <Content Include="ascii\Easteregg.txt" />
-    <Content Include="ascii\EndingBad.txt" />
-    <Content Include="ascii\EndingGood.txt" />
-    <Content Include="ascii\EndingJa.txt" />
-    <Content Include="ascii\EndingNee.txt" />
-    <Content Include="ascii\Hal.txt" />
-    <Content Include="ascii\Kitchen.txt" />
-    <Content Include="ascii\Livingroom.txt" />
-    <Content Include="ascii\mainmenu.txt" />
-    <Content Include="ascii\Stairs.txt" />
-    <Content Include="intro.txt" />
-    <Content Include="credits.txt" />
+    <Content Include="ascii\Bedroom1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Bedroom2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Easteregg.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\EndingBad.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\EndingGood.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\EndingJa.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\EndingNee.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Hal.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Kitchen.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Livingroom.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\mainmenu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ascii\Stairs.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="intro.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="credits.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
