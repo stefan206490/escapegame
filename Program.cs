@@ -265,7 +265,7 @@ namespace escapegame
 
         static bool load()
         {
-            Console.WriteLine("Welke slot wilt u inladen?[1-3] U kunt ook een nieuwe spel beginnen [-1]");
+            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
             if (File.Exists("SavedGame.txt"))
             {
                 Console.WriteLine(File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
@@ -310,6 +310,7 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame.txt").ElementAtOrDefault(11));
+                Program.playerName=(File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
 
                 TimerThread.Start();
                 return true;
@@ -329,6 +330,7 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame1.txt").ElementAtOrDefault(11));
+                Program.playerName = (File.ReadLines("SavedGame1.txt").ElementAtOrDefault(12));
 
                 TimerThread.Start();
                 return true;
@@ -348,14 +350,11 @@ namespace escapegame
                 miniGameCompleted = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(8));
                 hasCandle = bool.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(9));
                 currentRoom = int.Parse(File.ReadLines("SavedGame2.txt").ElementAtOrDefault(11));
+                Program.playerName = (File.ReadLines("SavedGame2.txt").ElementAtOrDefault(12));
+
 
                 TimerThread.Start();
                 return true;
-            }
-            else if (loadchoice == "-1")
-            {
-                TimerThread.Start();
-                return false;
             }
             else
             {
