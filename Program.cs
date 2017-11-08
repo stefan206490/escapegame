@@ -199,12 +199,16 @@ namespace escapegame
                     Console.WriteLine(VmainMenu);
                 }
 
-                Console.WriteLine("Voer uw naam in:");
-                Program.playerName = Console.ReadLine();
+                if (menuChoice == "new" || menuChoice == "1")
+                {
+                    Console.WriteLine("Voer uw naam in:");
+                    Program.playerName = Console.ReadLine();
 
-                Console.WriteLine("Uw naam is:");
-                Console.WriteLine(playerName);
-                Console.ReadLine();
+                    Console.WriteLine("Uw naam is:");
+                    Console.WriteLine(playerName);
+                    Console.ReadLine();
+                }
+                
 
                 if (validChoice == true && startGameChoice == true)
                 {
