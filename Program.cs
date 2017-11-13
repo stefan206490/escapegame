@@ -14,7 +14,7 @@ namespace escapegame
         public static int currentRoom = 1;
         public static bool inGame = false;
         public static string asciiArt = null;
-        public static string filePath = @"../../ascii/";
+        public static string filePath = @"ascii/";
         public static bool[] roomVisited = new bool[6];
         public static int tickRate = 10;
         public static int dialogueTickRate = 40;
@@ -141,7 +141,7 @@ namespace escapegame
             System.Console.Write("\n");
 
             // intro text
-            string introText = File.ReadAllText("../../intro.txt");
+            string introText = File.ReadAllText("intro.txt");
             foreach (char c in introText)
             {
                 System.Console.Write(c);
@@ -176,8 +176,10 @@ namespace escapegame
                 }
                 else if (menuChoice == "load" || menuChoice == "2")
                 {
-                    Program.load();
-                    return true;
+                    if (Program.load() == true)
+                    {
+                        return true;
+                    }
                 }
                 else if (menuChoice == "exit" || menuChoice == "3")
                 {
@@ -269,7 +271,7 @@ namespace escapegame
 
         static bool load()
         {
-            Console.WriteLine("Welke slot wilt u inladen?[1-3]");
+            Console.WriteLine("Welke slot wilt u inladen?[1-3] of [-1] om terug te gaan");
             if (File.Exists("SavedGame.txt"))
             {
                 Console.WriteLine("1)" + File.ReadLines("SavedGame.txt").ElementAtOrDefault(12));
@@ -359,6 +361,10 @@ namespace escapegame
 
                 TimerThread.Start();
                 return true;
+            }
+            else if (loadchoice == "-1")
+            {
+                return false;
             }
             else
             {
@@ -1467,7 +1473,7 @@ namespace escapegame
             Console.WriteLine("Dank je voor het spelen van het spel!");
 
             // show credits
-            string introText = File.ReadAllText("../../credits.txt");
+            string introText = File.ReadAllText("credits.txt");
             foreach (char c in introText)
             {
                 System.Console.Write(c);
