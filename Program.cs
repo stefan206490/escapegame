@@ -61,6 +61,8 @@ namespace escapegame
 
         static void Main(string[] args)
         {
+            Console.Title = "Escape Room";
+
             kamerVerhaalFunctie();
             
             Console.SetWindowSize(150, 45);
